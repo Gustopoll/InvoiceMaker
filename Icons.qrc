@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>Data/save.png</file>
+        <file>Data/savePDF.png</file>
+        <file>Data/loading.gif</file>
+        <file>Data/deleteClose.png</file>
+        <file>Data/customer.png</file>
+        <file>Data/supplier.png</file>
+        <file>Data/add.png</file>
+        <file>Data/factureIcon.png</file>
+    </qresource>
+</RCC>

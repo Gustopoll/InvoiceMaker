@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WelcomePage</class>
+ <widget class="QMainWindow" name="WelcomePage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>797</width>
+    <height>489</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0" colspan="2">
+       <widget class="QStackedWidget" name="stackedWidget">
+        <property name="currentIndex">
+         <number>-1</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>797</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuS_bor">
+    <property name="title">
+     <string>Súbor</string>
+    </property>
+    <addaction name="actionSuppliers"/>
+    <addaction name="actionOdberatelia"/>
+    <addaction name="actiondSettings"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <addaction name="menuS_bor"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Skončiť</string>
+   </property>
+  </action>
+  <action name="actiondSettings">
+   <property name="text">
+    <string>Nastavenia</string>
+   </property>
+  </action>
+  <action name="actionSuppliers">
+   <property name="text">
+    <string>Dodávatelia</string>
+   </property>
+  </action>
+  <action name="actionOdberatelia">
+   <property name="text">
+    <string>Odberatelia</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

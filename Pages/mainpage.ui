@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>919</width>
+    <height>535</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Page 1</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="1">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="2" column="3">
+       <widget class="QComboBox" name="comboBoxSupplier">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <item>
+         <property name="text">
+          <string>Všetci</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Dominik Švač</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="4">
+       <widget class="QTreeWidget" name="treeWidget">
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="headerHidden">
+         <bool>false</bool>
+        </property>
+        <attribute name="headerVisible">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="headerStretchLastSection">
+         <bool>true</bool>
+        </attribute>
+        <column>
+         <property name="text">
+          <string>N</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Meno</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Cena</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Dátum</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Číslo faktúry</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string/>
+         </property>
+        </column>
+        <item>
+         <property name="text">
+          <string>1</string>
+         </property>
+         <property name="text">
+          <string>Dominik Švač</string>
+         </property>
+         <property name="text">
+          <string>250</string>
+         </property>
+         <property name="text">
+          <string>25.1. 2022</string>
+         </property>
+         <property name="text">
+          <string>3</string>
+         </property>
+         <property name="text">
+          <string>X</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="comboBoxMonth">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <item>
+         <property name="text">
+          <string>Všetky</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Január</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Február</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Marec</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Apríl</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Máj</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Jún</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Júl</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>August</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>September</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Október</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>November</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>December</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="labelTotalPrice">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Celková cena: 250 €</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="text">
+         <string>Faktúry za mesiac</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QLabel" name="label_3">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Od dodávateľov</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QPushButton" name="buttonNewInvoice">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Nová faktúra</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2" colspan="2">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Rok</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="spinBoxYear">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="minimum">
+         <number>1980</number>
+        </property>
+        <property name="maximum">
+         <number>3000</number>
+        </property>
+        <property name="value">
+         <number>2022</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>spinBoxYear</tabstop>
+  <tabstop>buttonNewInvoice</tabstop>
+  <tabstop>comboBoxMonth</tabstop>
+  <tabstop>comboBoxSupplier</tabstop>
+  <tabstop>treeWidget</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
