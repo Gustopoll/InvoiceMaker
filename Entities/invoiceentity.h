@@ -37,8 +37,6 @@ public:
     int getId();
     void setId(int value);
 
-    BankInfoEntity *getBankinfo();
-
     int getIdSupplier();
     void setIdSupplier(int value);
 
@@ -70,8 +68,6 @@ private:
 
     SupplierEntity *supplierSaved;
     CustomerEntity *customerSaved;
-
-    BankInfoEntity *bankinfo;
 
     QList<ItemEntity *> items;
 };

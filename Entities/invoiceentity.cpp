@@ -4,7 +4,6 @@ InvoiceEntity::InvoiceEntity()
 {
     paymentMethon = Payment::Cash;
     invoiceType = InvoiceType::TypeA;
-    bankinfo = new BankInfoEntity();
     customerSaved = nullptr;
     supplierSaved = nullptr;
     items.clear();
@@ -79,11 +78,6 @@ int InvoiceEntity::getId()
 void InvoiceEntity::setId(int value)
 {
     id = value;
-}
-
-BankInfoEntity *InvoiceEntity::getBankinfo()
-{
-    return bankinfo;
 }
 
 int InvoiceEntity::getIdSupplier()

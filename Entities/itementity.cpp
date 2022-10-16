@@ -44,3 +44,13 @@ void ItemEntity::setDescription(QString value)
 {
     description = value;
 }
+
+double ItemEntity::getDPH()
+{
+    return dph;
+}
+
+void ItemEntity::setDPH(double value)
+{
+    dph = value;
+}

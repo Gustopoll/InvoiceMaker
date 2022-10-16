@@ -99,6 +99,31 @@ QString DBContext::CreateTables()
 
     qDebug() << "settings" << q.lastError().text();
 
+    q.exec("CREATE TABLE IF NOT EXISTS invoice"
+              "(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+              "idSupplier INTEGER,"
+              "idCustomer INTEGER,"
+              "idSupplierSaved INTEGER,"
+              "idCustomerSaved INTEGER,"
+              "dateV date,"
+              "dateD date,"
+              "dateS date,"
+              "payment INTEGER,"
+              "invoicetype INTEGER,"
+              "factureNumber INTEGER);");
+
+    qDebug() << "invoice" << q.lastError().text();
+
+    //q.exec("DROP TABLE item;");
+    q.exec("CREATE TABLE IF NOT EXISTS item"
+              "(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+              "idInvoice INTEGER,"
+              "price REAL,"
+              "count REAL,"
+              "dph REAL,"
+              "description VARCHAR(512));");
+
+    qDebug() << "item" << q.lastError().text();
 
     return q.lastError().text();
 }

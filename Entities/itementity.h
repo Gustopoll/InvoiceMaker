@@ -20,11 +20,15 @@ public:
     QString getDescription();
     void setDescription(QString value);
 
+    double getDPH();
+    void setDPH(double value);
+
 private:
     int id;
     double price;
     int count;
     QString description;
+    double dph;
 };
 
 #endif // ITEMENTITY_H
