@@ -10,6 +10,11 @@ int SettingsEntity::getId()
     return id;
 }
 
+void SettingsEntity::setId(int value)
+{
+    id = value;
+}
+
 int SettingsEntity::getIndexV()
 {
     return indexV;

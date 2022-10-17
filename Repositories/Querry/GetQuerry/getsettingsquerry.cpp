@@ -19,6 +19,7 @@ SettingsEntity *GetSettingsQuerry::Get()
     if (q.next() == true)
     {
         entity = new SettingsEntity();
+        entity->setId(q.value("id").toInt());
         entity->setIndexV(q.value("indexV").toInt());
         entity->setIndexD(q.value("indexD").toInt());
         entity->setIndexD2(q.value("indexD2").toInt());
@@ -30,4 +31,18 @@ SettingsEntity *GetSettingsQuerry::Get()
     }
 
     return entity;
+}
+
+int GetSettingsQuerry::getId()
+{
+    QSqlQuery q;
+    q.prepare("SELECT * FROM " + nameTable);
+    q.exec();
+    lastError = q.lastError().text();
+    int idValue = -1;
+    if (q.next() == true)
+    {
+        idValue = q.value("id").toInt();
+    }
+    return idValue;
 }

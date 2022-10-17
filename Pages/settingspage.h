@@ -7,6 +7,7 @@
 #include <Extensions/customstyle.h>
 #include <Repositories/Querry/AddQuerry/addsettingsquerry.h>
 #include <Repositories/Querry/GetQuerry/getsettingsquerry.h>
+#include <Repositories/Querry/UpdateQuerry/updatesettingsquerry.h>
 #include <Controller/settingscontroller.h>
 
 namespace Ui {

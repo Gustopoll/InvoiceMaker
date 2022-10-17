@@ -10,6 +10,7 @@ public:
     SettingsEntity();
 
     int getId();
+    void setId(int value);
 
     int getIndexV();
     void setIndexV(int value);
@@ -34,6 +35,8 @@ public:
 
     double getDPH();
     void setDPH(double value);
+
+
 
 private:
     int id;

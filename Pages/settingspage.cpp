@@ -49,8 +49,13 @@ void SettingsPage::on_buttonSave_clicked()
     }
     else
     {
-        //update entity
+        UpdateSettingsQuerry q;
+        auto entity = settingsController->CreateEnity();
+        q.Update(entity);
+        qDebug() << q.GetLastError();
+        delete entity;
         delete e;
+        stackedWidget->setCurrentIndex((int)PageNumber::MAIN_MENU);
     }
 }
 

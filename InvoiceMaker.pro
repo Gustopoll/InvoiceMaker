@@ -65,6 +65,7 @@ SOURCES += \
     Repositories/Querry/GetQuerry/getsuppliersavedquerry.cpp \
     Repositories/Querry/UpdateQuerry/updatecustomerquerry.cpp \
     Repositories/Querry/UpdateQuerry/updatequerry.cpp \
+    Repositories/Querry/UpdateQuerry/updatesettingsquerry.cpp \
     Repositories/Querry/UpdateQuerry/updatesupplierquerry.cpp \
     Repositories/Querry/basequerry.cpp \
     Repositories/dbcontext.cpp \
@@ -122,6 +123,7 @@ HEADERS += \
     Repositories/Querry/GetQuerry/getsuppliersavedquerry.h \
     Repositories/Querry/UpdateQuerry/updatecustomerquerry.h \
     Repositories/Querry/UpdateQuerry/updatequerry.h \
+    Repositories/Querry/UpdateQuerry/updatesettingsquerry.h \
     Repositories/Querry/UpdateQuerry/updatesupplierquerry.h \
     Repositories/Querry/basequerry.h \
     Repositories/dbcontext.h \

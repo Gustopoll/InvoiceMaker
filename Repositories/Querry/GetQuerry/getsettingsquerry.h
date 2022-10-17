@@ -10,6 +10,7 @@ public:
     GetSettingsQuerry();
 
     SettingsEntity* Get();
+    int getId();
 
 protected:
     QString nameTable;
