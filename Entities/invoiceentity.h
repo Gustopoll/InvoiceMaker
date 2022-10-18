@@ -16,11 +16,11 @@ class InvoiceEntity
 public:
     InvoiceEntity();
 
-    SupplierEntity *getSupplier();
-    void setSupplier(SupplierEntity *value);
+    SupplierEntity *getSupplierSaved();
+    void setSupplierSaved(SupplierEntity *value);
 
-    CustomerEntity *getCustomer();
-    void setCustomer(CustomerEntity *value);
+    CustomerEntity *getCustomerSaved();
+    void setCustomerSaved(CustomerEntity *value);
 
     Payment getPaymentMethon();
     void setPaymentMethon(Payment value);

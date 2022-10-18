@@ -10,22 +10,22 @@ InvoiceEntity::InvoiceEntity()
 }
 
 
-SupplierEntity *InvoiceEntity::getSupplier()
+SupplierEntity *InvoiceEntity::getSupplierSaved()
 {
     return supplierSaved;
 }
 
-void InvoiceEntity::setSupplier(SupplierEntity *value)
+void InvoiceEntity::setSupplierSaved(SupplierEntity *value)
 {
     supplierSaved = value;
 }
 
-CustomerEntity *InvoiceEntity::getCustomer()
+CustomerEntity *InvoiceEntity::getCustomerSaved()
 {
     return customerSaved;
 }
 
-void InvoiceEntity::setCustomer(CustomerEntity *value)
+void InvoiceEntity::setCustomerSaved(CustomerEntity *value)
 {
     customerSaved = value;
 }

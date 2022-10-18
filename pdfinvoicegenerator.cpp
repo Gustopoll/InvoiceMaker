@@ -32,8 +32,8 @@ void PDFInvoiceGenerator::Generate(InvoiceEntity *invoice)
     painter->setFont(classic);
     painter->setPen(pen);
 
-    SupplierGenerate(invoice->getSupplier());
-    CustomerGenerate(invoice->getCustomer());
+    SupplierGenerate(invoice->getSupplierSaved());
+    CustomerGenerate(invoice->getCustomerSaved());
 
     newLine();
     newLine();

@@ -19,6 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Controller/customercontroller.cpp \
+    Controller/invoicecontroller.cpp \
     Controller/iteminvoicecontroller.cpp \
     Controller/requireditemscontroller.cpp \
     Controller/settingscontroller.cpp \
@@ -48,17 +49,20 @@ SOURCES += \
     Pages/welcomepage.cpp \
     Repositories/Querry/AddQuerry/addcustomerquerry.cpp \
     Repositories/Querry/AddQuerry/addcustomersavedquerry.cpp \
+    Repositories/Querry/AddQuerry/addinvoicequerry.cpp \
     Repositories/Querry/AddQuerry/addquerry.cpp \
     Repositories/Querry/AddQuerry/addsettingsquerry.cpp \
     Repositories/Querry/AddQuerry/addsupplierquerry.cpp \
     Repositories/Querry/AddQuerry/addsuppliersavedquerry.cpp \
     Repositories/Querry/DeleteQuerry/deletecustomerquerry.cpp \
     Repositories/Querry/DeleteQuerry/deletecustomersavedquerry.cpp \
+    Repositories/Querry/DeleteQuerry/deleteinvoicequerry.cpp \
     Repositories/Querry/DeleteQuerry/deletequerry.cpp \
     Repositories/Querry/DeleteQuerry/deletesupplierquerry.cpp \
     Repositories/Querry/DeleteQuerry/deletesuppliersavedquerry.cpp \
     Repositories/Querry/GetQuerry/getcustomerquerry.cpp \
     Repositories/Querry/GetQuerry/getcustomersavedquerry.cpp \
+    Repositories/Querry/GetQuerry/getinvoicequerry.cpp \
     Repositories/Querry/GetQuerry/getquerry.cpp \
     Repositories/Querry/GetQuerry/getsettingsquerry.cpp \
     Repositories/Querry/GetQuerry/getsupplierquerry.cpp \
@@ -74,6 +78,7 @@ SOURCES += \
 
 HEADERS += \
     Controller/customercontroller.h \
+    Controller/invoicecontroller.h \
     Controller/iteminvoicecontroller.h \
     Controller/requireditemscontroller.h \
     Controller/settingscontroller.h \
@@ -106,17 +111,20 @@ HEADERS += \
     Pages/welcomepage.h \
     Repositories/Querry/AddQuerry/addcustomerquerry.h \
     Repositories/Querry/AddQuerry/addcustomersavedquerry.h \
+    Repositories/Querry/AddQuerry/addinvoicequerry.h \
     Repositories/Querry/AddQuerry/addquerry.h \
     Repositories/Querry/AddQuerry/addsettingsquerry.h \
     Repositories/Querry/AddQuerry/addsupplierquerry.h \
     Repositories/Querry/AddQuerry/addsuppliersavedquerry.h \
     Repositories/Querry/DeleteQuerry/deletecustomerquerry.h \
     Repositories/Querry/DeleteQuerry/deletecustomersavedquerry.h \
+    Repositories/Querry/DeleteQuerry/deleteinvoicequerry.h \
     Repositories/Querry/DeleteQuerry/deletequerry.h \
     Repositories/Querry/DeleteQuerry/deletesupplierquerry.h \
     Repositories/Querry/DeleteQuerry/deletesuppliersavedquerry.h \
     Repositories/Querry/GetQuerry/getcustomerquerry.h \
     Repositories/Querry/GetQuerry/getcustomersavedquerry.h \
+    Repositories/Querry/GetQuerry/getinvoicequerry.h \
     Repositories/Querry/GetQuerry/getquerry.h \
     Repositories/Querry/GetQuerry/getsettingsquerry.h \
     Repositories/Querry/GetQuerry/getsupplierquerry.h \

@@ -78,8 +78,8 @@ void MainPage::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
     InvoiceEntity* entity = new InvoiceEntity();
     SupplierEntity *s = new SupplierEntity();
     CustomerEntity *c = new CustomerEntity();
-    entity->setCustomer(c);
-    entity->setSupplier(s);
+    entity->setCustomerSaved(c);
+    entity->setSupplierSaved(s);
 
     ShowInvoicePage *w = (ShowInvoicePage*)stackedWidget->widget((int)PageNumber::SHOW_INVOICE);
     w->SetInvoice(entity);

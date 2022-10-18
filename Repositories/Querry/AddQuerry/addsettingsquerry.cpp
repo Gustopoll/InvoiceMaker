@@ -9,6 +9,9 @@ AddSettingsQuerry::AddSettingsQuerry()
 
 bool AddSettingsQuerry::Add(SettingsEntity *entity)
 {
+    if (entity == nullptr)
+        return SetErrorMSG("null " + nameTable + " entity object");
+
     DateHelper helper;
     QSqlQuery q;
     q.prepare("INSERT INTO " + nameTable + " (indexV, indexD, indexD2, indexS, dateV, dateD, dateS, DPH) "
