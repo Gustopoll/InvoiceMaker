@@ -1,5 +1,6 @@
 #include "addcustomersavedquerry.h"
 #include "addinvoicequerry.h"
+#include "additemquerry.h"
 #include "addsuppliersavedquerry.h"
 
 
@@ -37,6 +38,12 @@ bool AddInvoiceQuerry::Add(InvoiceEntity *entity)
     q.bindValue(":factureNumber_value",entity->getFactureNumber());
 
     q.exec();
+
+    int lastId = q.lastInsertId().toInt();
+    auto items = entity->getItems();
+    AddItemQuerry itemQuerry;
+    for (int i = 0; i < items.size(); i++)
+        itemQuerry.Add(items[i],lastId);
 
     return SetErrorMSG(q.lastError());
 }

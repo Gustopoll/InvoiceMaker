@@ -8,6 +8,8 @@
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 
+#include <Entities/invoiceentity.h>
+
 class ItemInvoiceController
 {
 public:
@@ -21,6 +23,7 @@ public:
     void AddLabelSumTotalPrice(QLabel* label);
 
     void CreateItem(QTreeWidget* widget);
+    QList<ItemEntity*> GetAllEntities(QTreeWidget* widget);
     void Update();
     void Clear(QTreeWidget* widget);
 

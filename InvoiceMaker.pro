@@ -50,6 +50,7 @@ SOURCES += \
     Repositories/Querry/AddQuerry/addcustomerquerry.cpp \
     Repositories/Querry/AddQuerry/addcustomersavedquerry.cpp \
     Repositories/Querry/AddQuerry/addinvoicequerry.cpp \
+    Repositories/Querry/AddQuerry/additemquerry.cpp \
     Repositories/Querry/AddQuerry/addquerry.cpp \
     Repositories/Querry/AddQuerry/addsettingsquerry.cpp \
     Repositories/Querry/AddQuerry/addsupplierquerry.cpp \
@@ -112,6 +113,7 @@ HEADERS += \
     Repositories/Querry/AddQuerry/addcustomerquerry.h \
     Repositories/Querry/AddQuerry/addcustomersavedquerry.h \
     Repositories/Querry/AddQuerry/addinvoicequerry.h \
+    Repositories/Querry/AddQuerry/additemquerry.h \
     Repositories/Querry/AddQuerry/addquerry.h \
     Repositories/Querry/AddQuerry/addsettingsquerry.h \
     Repositories/Querry/AddQuerry/addsupplierquerry.h \

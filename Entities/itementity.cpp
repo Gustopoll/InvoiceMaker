@@ -54,3 +54,13 @@ void ItemEntity::setDPH(double value)
 {
     dph = value;
 }
+
+double ItemEntity::getTotalPrice()
+{
+    return totalPrice;
+}
+
+void ItemEntity::setTotalPrice(double value)
+{
+    totalPrice = value;
+}

@@ -61,6 +61,24 @@ void ItemInvoiceController::CreateItem(QTreeWidget *widget)
     labelSumTotalPrice->setText("Cena Celkom: " + QString::number(totalSum,'f', 2) + " €");
 }
 
+QList<ItemEntity *> ItemInvoiceController::GetAllEntities(QTreeWidget *widget)
+{
+    QList<ItemEntity*> items;
+    for( int i = 0; i < widget->topLevelItemCount(); ++i )
+    {
+        auto item = widget->topLevelItem(i);
+        ItemEntity* entity = new ItemEntity();
+        entity->setCount(item->text(0).toInt());
+        entity->setDescription(item->text(1));
+        entity->setPrice(item->text(2).replace(",", ".").toDouble());
+        entity->setDPH(item->text(3).replace(",", ".").toDouble());
+        qDebug() << entity->getPrice() << entity->getDPH();
+        entity->setTotalPrice(item->text(4).toDouble());
+        items.push_back(entity);
+    }
+    return items;
+}
+
 void ItemInvoiceController::Update()
 {
     double sum = ComputeTotalPrice();

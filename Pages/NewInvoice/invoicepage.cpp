@@ -174,6 +174,11 @@ void InvoicePage::on_buttonSave_clicked()
     invoiceController->setComboBoxPayment(ui->comboBoxPayment);
     invoiceController->setCustomerSavedEntity(customerEntity);
     invoiceController->setSupplierSavedEntity(supplierEntity);
+
+    auto items = itemInvoiceController->GetAllEntities(ui->treeWidget);
+    for (int i = 0; i < items.size(); i++)
+        invoiceController->addItem(items[i]);
+
     auto invoice = invoiceController->Create();
 
     AddInvoiceQuerry q;
@@ -358,3 +363,4 @@ void InvoicePage::on_doubleSpinBoxDPH_valueChanged(double arg1)
 {
     ui->doubleSpinBoxDPH_item->setValue(arg1);
 }
+

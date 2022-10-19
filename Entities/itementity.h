@@ -23,9 +23,13 @@ public:
     double getDPH();
     void setDPH(double value);
 
+    double getTotalPrice();
+    void setTotalPrice(double value);
+
 private:
     int id;
     double price;
+    double totalPrice;
     int count;
     QString description;
     double dph;

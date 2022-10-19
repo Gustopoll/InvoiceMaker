@@ -43,18 +43,14 @@ private slots:
     void on_comboBoxSupplier_currentIndexChanged(int index);
     void on_comboBoxCustomer_currentIndexChanged(int index);
 
-
     void on_buttonAddItem_clicked();
-
     void on_spinBoxCount_valueChanged(int arg1);
-
     void on_doubleSpinBoxPrice_valueChanged(double arg1);
-
     void on_doubleSpinBoxDPH_item_valueChanged(double arg1);
-
     void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
-
     void on_doubleSpinBoxDPH_valueChanged(double arg1);
+
+
 
 private:
     Ui::InvoicePage *ui;

@@ -2,7 +2,8 @@
 
 InvoiceController::InvoiceController()
 {
-
+    idCustomer = -1;
+    idSupplier = -1;
 }
 
 InvoiceEntity *InvoiceController::Create()

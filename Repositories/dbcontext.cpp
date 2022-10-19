@@ -119,6 +119,7 @@ QString DBContext::CreateTables()
               "(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
               "idInvoice INTEGER,"
               "price REAL,"
+              "totalPrice REAL,"
               "count REAL,"
               "dph REAL,"
               "description VARCHAR(512));");
