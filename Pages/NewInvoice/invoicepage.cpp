@@ -7,7 +7,9 @@
 #include <Repositories/Querry/GetQuerry/getcustomerquerry.h>
 #include <Repositories/Querry/GetQuerry/getsupplierquerry.h>
 #include <Controller/customercontroller.h>
+#include <Controller/invoicecontroller.h>
 #include <Controller/suppliercontroller.h>
+#include <Repositories/Querry/AddQuerry/addinvoicequerry.h>
 
 #define PAGE1 0
 #define PAGE2 1
@@ -125,7 +127,62 @@ void InvoicePage::on_buttonBackTo2_clicked()
 
 void InvoicePage::on_buttonSave_clicked()
 {
+    SupplierEntity* supplierEntity = new SupplierEntity();
 
+    supplierEntity->setIco(ui->lineEditICO_D->text());
+    supplierEntity->setName(ui->lineEditNameD->text());
+    supplierEntity->setFactureNumber(ui->lineEditNumberFacture->text().toInt());
+    supplierEntity->getPayer()->setDic(ui->lineEditDIC_D->text());
+    supplierEntity->getPayer()->setIcdph(ui->lineEditICDPH_D->text());
+    supplierEntity->getAdress()->setPsc(ui->lineEditPSC_D->text());
+    supplierEntity->getAdress()->setCity(ui->lineEditCityD->text());
+    supplierEntity->getAdress()->setState(ui->lineEditStateD->text());
+    supplierEntity->getAdress()->setStreet(ui->lineEditAdressD->text());
+    supplierEntity->getAdress()->setStreetNumber("");
+
+    supplierEntity->getBankinfo()->setVS(ui->lineEditVS->text());
+    supplierEntity->getBankinfo()->setIBAN(ui->lineEditIBAN->text());
+    supplierEntity->getBankinfo()->setSWIFT(ui->lineEditSWIFT->text());
+
+    CustomerEntity* customerEntity = new CustomerEntity();
+
+    customerEntity->setIco(ui->lineEditICO_O->text());
+    customerEntity->setName(ui->lineEditNameO->text());
+    customerEntity->getPayer()->setDic(ui->lineEditDIC_O->text());
+    customerEntity->getPayer()->setIcdph(ui->lineEditICDPH_O->text());
+    customerEntity->getAdress()->setPsc(ui->lineEditPSC_O->text());
+    customerEntity->getAdress()->setCity(ui->lineEditCityO->text());
+    customerEntity->getAdress()->setState(ui->lineEditStateO->text());
+    customerEntity->getAdress()->setStreet(ui->lineEditAdressO->text());
+    customerEntity->getAdress()->setStreetNumber("");
+
+    InvoiceController* invoiceController = new InvoiceController();
+    invoiceController->setDateEditD(ui->dateEditD);
+    invoiceController->setDateEditV(ui->dateEditV);
+    invoiceController->setDateEditS(ui->dateEditS);
+
+
+    auto customer = customerController->GetEntityByIndex(ui->comboBoxCustomer->currentIndex()-1);
+    if (customer != nullptr)
+        invoiceController->setIdCustomer(customer->getId());
+
+    auto supplier = supplierController->GetEntityByIndex(ui->comboBoxSupplier->currentIndex()-1);
+    if (supplier != nullptr)
+        invoiceController->setIdSupplier(supplier->getId());
+
+    invoiceController->setComboBoxType(ui->comboBoxType);
+    invoiceController->setComboBoxPayment(ui->comboBoxPayment);
+    invoiceController->setCustomerSavedEntity(customerEntity);
+    invoiceController->setSupplierSavedEntity(supplierEntity);
+    auto invoice = invoiceController->Create();
+
+    AddInvoiceQuerry q;
+    q.Add(invoice);
+
+    delete customerEntity;
+    delete supplierEntity;
+    delete invoice;
+    delete invoiceController;
 }
 
 

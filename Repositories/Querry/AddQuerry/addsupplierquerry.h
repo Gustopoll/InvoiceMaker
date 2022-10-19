@@ -10,9 +10,11 @@ public:
     AddSupplierQuerry();
 
     bool Add(SupplierEntity* entity);
+    int GetInsertedID();
 
 protected:
     QString nameTable;
+    int id;
 };
 
 #endif // ADDSUPPLIERQUERRY_H

@@ -26,6 +26,12 @@ bool AddCustomerQuerry::Add(CustomerEntity *entity)
     q.bindValue(":isdeleted_value","0");
 
     q.exec();
+    id = q.lastInsertId().toInt();
 
     return SetErrorMSG(q.lastError());
+}
+
+int AddCustomerQuerry::GetInsertedID()
+{
+    return id;
 }

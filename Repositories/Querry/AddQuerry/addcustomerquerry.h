@@ -10,9 +10,11 @@ public:
     AddCustomerQuerry();
 
     bool Add(CustomerEntity* entity);
+    int GetInsertedID();
 
 protected:
     QString nameTable;
+    int id;
 };
 
 #endif // ADDCUSTOMERQUERRY_H

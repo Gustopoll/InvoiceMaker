@@ -3,7 +3,6 @@
 #include "ui_addcustomerpage.h"
 
 #include <Repositories/Querry/AddQuerry/addcustomersavedquerry.h>
-#include <Controller/Creator/customercreator.h>
 
 AddCustomerPage::AddCustomerPage(QWidget *parent,QStackedWidget *stackedWidget) :
     QWidget(parent),

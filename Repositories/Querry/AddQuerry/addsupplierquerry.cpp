@@ -32,6 +32,12 @@ bool AddSupplierQuerry::Add(SupplierEntity *entity)
     q.bindValue(":isdeleted_value","0");
 
     q.exec();
+    id = q.lastInsertId().toInt();
 
     return SetErrorMSG(q.lastError());
+}
+
+int AddSupplierQuerry::GetInsertedID()
+{
+    return id;
 }
