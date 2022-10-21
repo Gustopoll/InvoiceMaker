@@ -9,6 +9,7 @@ class GetInvoiceQuerry : public GetQuerry
 public:
     GetInvoiceQuerry();
 
+    InvoiceEntity* GetOneById(int id);
     InvoiceEntity* GetAll();
 protected:
     QString nameTable;

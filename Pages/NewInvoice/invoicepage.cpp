@@ -188,6 +188,8 @@ void InvoicePage::on_buttonSave_clicked()
     delete supplierEntity;
     delete invoice;
     delete invoiceController;
+
+    stackedWidget->widget((int)PageNumber::MAIN_MENU);
 }
 
 

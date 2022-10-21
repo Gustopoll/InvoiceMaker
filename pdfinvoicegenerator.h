@@ -15,7 +15,7 @@
 class PDFInvoiceGenerator
 {
 public:
-    PDFInvoiceGenerator();
+    PDFInvoiceGenerator(QString pathfile);
     PDFInvoiceGenerator(QPainter *frame);
 
     void Generate(InvoiceEntity *invoice);

@@ -120,6 +120,16 @@ void InvoiceEntity::addItem(ItemEntity* value)
     items.push_back(value);
 }
 
+double InvoiceEntity::GetTotalPrice()
+{
+    double total = 0;
+    for (int i = 0; i < items.size(); i++)
+    {
+        total += items[i]->getTotalPrice();
+    }
+    return total;
+}
+
 InvoiceType InvoiceEntity::getInvoiceType()
 {
     return invoiceType;

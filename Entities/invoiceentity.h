@@ -51,6 +51,7 @@ public:
 
     QList<ItemEntity*> getItems();
     void addItem(ItemEntity* value);
+    double GetTotalPrice();
 
 private:
     int id;

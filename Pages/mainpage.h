@@ -32,6 +32,8 @@ private:
     QStackedWidget *stackedWidget;
 
     void resizeEvent(QResizeEvent *event);
+    void AddInvoiceEntity(InvoiceEntity* entity, int number);
+    void SaveInvoice(InvoiceEntity* entity, QString pathfile);
 
 };
 #endif // MAINWINDOW_H

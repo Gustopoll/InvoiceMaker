@@ -63,6 +63,11 @@
         </attribute>
         <column>
          <property name="text">
+          <string>ID</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
           <string>N</string>
          </property>
         </column>
@@ -91,7 +96,15 @@
           <string/>
          </property>
         </column>
+        <column>
+         <property name="text">
+          <string/>
+         </property>
+        </column>
         <item>
+         <property name="text">
+          <string/>
+         </property>
          <property name="text">
           <string>1</string>
          </property>
@@ -106,6 +119,9 @@
          </property>
          <property name="text">
           <string>3</string>
+         </property>
+         <property name="text">
+          <string>X</string>
          </property>
          <property name="text">
           <string>X</string>

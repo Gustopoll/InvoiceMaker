@@ -1,16 +1,21 @@
 #include "pdfinvoicegenerator.h"
 
-PDFInvoiceGenerator::PDFInvoiceGenerator()
+#include <Extensions/datehelper.h>
+
+PDFInvoiceGenerator::PDFInvoiceGenerator(QString pathfile)
 {
     printer.setOutputFormat(QPrinter::PdfFormat);
     printer.setPaperSize(QPrinter::A4);
-    printer.setOutputFileName(QCoreApplication::applicationDirPath() + "/realTEST.pdf");
+    //printer.setOutputFileName(QCoreApplication::applicationDirPath() + "/realTEST.pdf");
+    printer.setOutputFileName(pathfile);
     printer.setPageMargins(QMarginsF(15, 15, 15, 15));
     bold = QFont("Calibri", 11);
     bold.setBold(true);
     classic = QFont("Calibri", 11);
     qDebug() << printer.width() << printer.height();
+    qDebug() << pathfile;
 
+    painter = new QPainter();
     if (!painter->begin(&printer))
     {
         qDebug() << "no draw";
@@ -43,12 +48,13 @@ void PDFInvoiceGenerator::Generate(InvoiceEntity *invoice)
     OtherGenerate(invoice);
 
     painter->end();
+    delete painter;
 
 }
 
 void PDFInvoiceGenerator::SupplierGenerate(SupplierEntity *entity)
 {
-    painter->drawText(leftBorder,newLine(),"Faktúra číslo: 1/2022");
+    painter->drawText(leftBorder,newLine(),"Faktúra číslo: " + QString::number(entity->getFactureNumber()));
     newLine();
 
     painter->setFont(bold);
@@ -105,9 +111,9 @@ void PDFInvoiceGenerator::OtherGenerate(InvoiceEntity *invoice)
     painter->drawText(leftBorder + 400,sameLine,"Dátum splatnosti");
 
     sameLine = newLine();
-    painter->drawText(leftBorder,sameLine,"15.8.2022");
-    painter->drawText(leftBorder + 200,sameLine,"31.07.2022");
-    painter->drawText(leftBorder + 400,sameLine,"25.8.2022");
+    painter->drawText(leftBorder,sameLine, invoice->getDateV().toString("dd.MM.yyyy"));
+    painter->drawText(leftBorder + 200,sameLine,invoice->getDateD().toString("dd.MM.yyyy"));
+    painter->drawText(leftBorder + 400,sameLine,invoice->getDateS().toString("dd.MM.yyyy"));
 
     newLine(); newLine(); newLine();
     sameLine = newLine();
