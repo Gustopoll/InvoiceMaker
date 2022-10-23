@@ -24,9 +24,9 @@ SettingsEntity *GetSettingsQuerry::Get()
         entity->setIndexD(q.value("indexD").toInt());
         entity->setIndexD2(q.value("indexD2").toInt());
         entity->setIndexS(q.value("indexS").toInt());
-        entity->setDateV(helper.getDate(q.value("dateV").toString()));
-        entity->setDateD(helper.getDate(q.value("dateD").toString()));
-        entity->setDateS(helper.getDate(q.value("dateS").toString()));
+        entity->setDateV(helper.getDateDB(q.value("dateV").toString()));
+        entity->setDateD(helper.getDateDB(q.value("dateD").toString()));
+        entity->setDateS(helper.getDateDB(q.value("dateS").toString()));
         entity->setDPH(q.value("DPH").toDouble());
     }
 

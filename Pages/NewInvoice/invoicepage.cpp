@@ -10,6 +10,7 @@
 #include <Controller/invoicecontroller.h>
 #include <Controller/suppliercontroller.h>
 #include <Repositories/Querry/AddQuerry/addinvoicequerry.h>
+#include <Pages/mainpage.h>
 
 #define PAGE1 0
 #define PAGE2 1
@@ -75,7 +76,7 @@ InvoicePage::~InvoicePage()
 
 void InvoicePage::Update()
 {
-    //TODO item invoice clear
+    ui->stackedWidget->setCurrentIndex(0);
     itemInvoiceController->Clear(ui->treeWidget);
     ui->doubleSpinBoxDPH_item->setValue(ui->doubleSpinBoxDPH->value());
     ui->lineEditDescription->setText("Na základe objednávok vám fakturujeme cenu práce za mesiac " +
@@ -189,7 +190,9 @@ void InvoicePage::on_buttonSave_clicked()
     delete invoice;
     delete invoiceController;
 
-    stackedWidget->widget((int)PageNumber::MAIN_MENU);
+    auto w = (MainPage*)stackedWidget->widget((int)PageNumber::MAIN_MENU);
+    w->Update();
+    stackedWidget->setCurrentIndex((int)PageNumber::MAIN_MENU);
 }
 
 

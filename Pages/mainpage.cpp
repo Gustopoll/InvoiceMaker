@@ -27,6 +27,11 @@ MainPage::MainPage(QWidget *parent, QStackedWidget *stackedWidget)
 
     ui->treeWidget->setIconSize(QSize(30,30));
     ui->treeWidget->setColumnHidden(0,true);
+
+    int month = QDate::currentDate().month();
+    ui->comboBoxMonth->setCurrentIndex(month);
+    ui->spinBoxYear->setValue(QDate::currentDate().year());
+
     Update();
 }
 
@@ -41,17 +46,18 @@ void MainPage::Update()
     SupplierController supplierController;
     supplierController.SetSuppliers("Všetci",ui->comboBoxSupplier);
 
-    int month = QDate::currentDate().month();
-    ui->comboBoxMonth->setCurrentIndex(month);
-    ui->spinBoxYear->setValue(QDate::currentDate().year());
+    int idSupplier = 0;
+    auto entity = supplierController.GetEntityByIndex(ui->comboBoxSupplier->currentIndex()-1);
+    if (entity != nullptr)
+    {
+        idSupplier = entity->getId();
+    }
+    GetInvoiceQuerry q;
+    auto list = q.GetAllWhere(ui->spinBoxYear->value(),ui->comboBoxMonth->currentIndex(),idSupplier);
+    qDebug() << q.GetLastError();
+    for (int i = 0; i < list.size(); i++)
+        AddInvoiceEntity(list[i],i+1);
 
-    InvoiceEntity* entity = new InvoiceEntity();
-    entity->setId(1);
-    entity->setSupplierSaved(new SupplierEntity());
-    entity->getSupplierSaved()->setName("Dominik");
-    entity->setFactureNumber(1);
-    entity->setDateV(QDate::currentDate());
-    AddInvoiceEntity(entity,1);
 }
 
 void MainPage::resizeEvent(QResizeEvent *event)
@@ -75,7 +81,7 @@ void MainPage::AddInvoiceEntity(InvoiceEntity *entity, int number)
     item->setText(2,entity->getSupplierSaved()->getName());
     item->setText(3,QString::number(entity->GetTotalPrice()) + " €");
     item->setText(4,helper.toString(entity->getDateV()));
-    item->setText(5,QString::number(entity->getFactureNumber()));
+    item->setText(5,QString::number(entity->getSupplierSaved()->getFactureNumber()));
     item->setIcon(6,QIcon(":/icon/Data/savePDF.png"));
     item->setIcon(7,QIcon(":/icon/Data/deleteClose.png"));
 
@@ -125,4 +131,27 @@ void MainPage::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
     ShowInvoicePage *w = (ShowInvoicePage*)stackedWidget->widget((int)PageNumber::SHOW_INVOICE);
     w->SetInvoice(entity);
     stackedWidget->setCurrentIndex((int)PageNumber::SHOW_INVOICE);
+}
+
+void MainPage::on_spinBoxYear_valueChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    Update();
+    qDebug() << "year changed";
+}
+
+void MainPage::on_comboBoxMonth_currentIndexChanged(int index)
+{
+    Q_UNUSED(index);
+    Update();
+
+    qDebug() << "month changed";
+}
+
+void MainPage::on_comboBoxSupplier_activated(int index)
+{
+    Q_UNUSED(index);
+    Update();
+
+    qDebug() << "supplier changed";
 }

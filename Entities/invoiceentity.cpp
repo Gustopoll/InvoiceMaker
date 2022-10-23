@@ -100,16 +100,6 @@ void InvoiceEntity::setIdCustomer(int value)
     idCustomer = value;
 }
 
-int InvoiceEntity::getFactureNumber()
-{
-    return factureNumber;
-}
-
-void InvoiceEntity::setFactureNumber(int value)
-{
-    factureNumber = value;
-}
-
 QList<ItemEntity*> InvoiceEntity::getItems()
 {
     return items;

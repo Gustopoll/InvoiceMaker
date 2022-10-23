@@ -26,7 +26,7 @@ QString DBContext::CreateTables()
     q.exec("DROP TABLE settings;");
     q.exec("DROP TABLE invoice;");
     q.exec("DROP TABLE item;");
-    */
+    // */
     q.exec("CREATE TABLE IF NOT EXISTS supplier"
               "(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
               "name VARCHAR(255),"
@@ -119,8 +119,7 @@ QString DBContext::CreateTables()
               "dateD date,"
               "dateS date,"
               "payment INTEGER,"
-              "invoicetype INTEGER,"
-              "factureNumber INTEGER);");
+              "invoicetype INTEGER);");
 
     qDebug() << "invoice" << q.lastError().text();
 

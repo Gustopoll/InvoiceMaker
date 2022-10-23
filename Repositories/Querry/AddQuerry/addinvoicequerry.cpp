@@ -25,20 +25,19 @@ bool AddInvoiceQuerry::Add(InvoiceEntity *entity)
 
     DateHelper helper;
     QSqlQuery q;
-    q.prepare("INSERT INTO " + nameTable + " (idSupplier, idCustomer, idSupplierSaved, idCustomerSaved, dateV, dateD, dateS, payment, invoicetype, factureNumber) "
+    q.prepare("INSERT INTO " + nameTable + " (idSupplier, idCustomer, idSupplierSaved, idCustomerSaved, dateV, dateD, dateS, payment, invoicetype) "
     "VALUES (:idSupplier_value, :idCustomer_value, :idSupplierSaved_value, :idCustomerSaved_value, :dateV_value, :dateD_value, :dateS_value,"
-    ":payment_value, :invoicetype_value, :factureNumber_value);");
+    ":payment_value, :invoicetype_value);");
 
     q.bindValue(":idSupplier_value",entity->getIdSupplier());
     q.bindValue(":idCustomer_value",entity->getIdCustomer());
     q.bindValue(":idSupplierSaved_value",sq.GetInsertedID());
     q.bindValue(":idCustomerSaved_value",cq.GetInsertedID());
-    q.bindValue(":dateV_value",helper.toString(entity->getDateV()));
-    q.bindValue(":dateD_value",helper.toString(entity->getDateD()));
-    q.bindValue(":dateS_value",helper.toString(entity->getDateS()));
+    q.bindValue(":dateV_value",helper.toStringDB(entity->getDateV()));
+    q.bindValue(":dateD_value",helper.toStringDB(entity->getDateD()));
+    q.bindValue(":dateS_value",helper.toStringDB(entity->getDateS()));
     q.bindValue(":payment_value",(int)entity->getPaymentMethon());
     q.bindValue(":invoicetype_value",(int)entity->getInvoiceType());
-    q.bindValue(":factureNumber_value",entity->getFactureNumber());
 
     q.exec();
 

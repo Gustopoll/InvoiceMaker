@@ -10,9 +10,13 @@ public:
     GetInvoiceQuerry();
 
     InvoiceEntity* GetOneById(int id);
-    InvoiceEntity* GetAll();
+    QList<InvoiceEntity*> GetAll();
+    QList<InvoiceEntity*> GetAllWhere(int year, int month, int idSupplier);
+
 protected:
     QString nameTable;
+
+    QList<InvoiceEntity*> Get(QString querry);
 };
 
 #endif // GETINVOICEQUERRY_H

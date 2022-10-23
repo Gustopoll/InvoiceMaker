@@ -46,9 +46,6 @@ public:
     InvoiceType getInvoiceType();
     void setInvoiceType(InvoiceType value);
 
-    int getFactureNumber();
-    void setFactureNumber(int value);
-
     QList<ItemEntity*> getItems();
     void addItem(ItemEntity* value);
     double GetTotalPrice();
@@ -65,7 +62,6 @@ private:
 
     Payment paymentMethon;
     InvoiceType invoiceType;
-    int factureNumber;
 
     SupplierEntity *supplierSaved;
     CustomerEntity *customerSaved;

@@ -22,10 +22,15 @@ public:
     ~MainPage();
 
     void Update();
+
 private slots:
     void on_buttonNewInvoice_clicked();
 
     void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
+
+    void on_spinBoxYear_valueChanged(int arg1);
+    void on_comboBoxMonth_currentIndexChanged(int index);
+    void on_comboBoxSupplier_activated(int index);
 
 private:
     Ui::MainWindow *ui;

@@ -21,9 +21,9 @@ bool AddSettingsQuerry::Add(SettingsEntity *entity)
     q.bindValue(":indexD_value",entity->getIndexD());
     q.bindValue(":indexD2_value",entity->getIndexD2());
     q.bindValue(":indexS_value",entity->getIndexS());
-    q.bindValue(":dateV_value",helper.toString(entity->getDateV()));
-    q.bindValue(":dateD_value",helper.toString(entity->getDateD()));
-    q.bindValue(":dateS_value",helper.toString(entity->getDateS()));
+    q.bindValue(":dateV_value",helper.toStringDB(entity->getDateV()));
+    q.bindValue(":dateD_value",helper.toStringDB(entity->getDateD()));
+    q.bindValue(":dateS_value",helper.toStringDB(entity->getDateS()));
     q.bindValue(":DPH_value",entity->getDPH());
 
     q.exec();
