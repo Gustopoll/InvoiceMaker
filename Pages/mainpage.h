@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QStackedWidget>
 #include <QTreeWidgetItem>
+#include <Controller/temporarymessagecontroller.h>
 #include "PagesNumbers.h"
 #include "../Extensions/customstyle.h"
 #include "../Entities/invoiceentity.h"
@@ -21,6 +22,7 @@ public:
     MainPage(QWidget *parent = nullptr, QStackedWidget *stackedWidget = nullptr);
     ~MainPage();
 
+    void Start();
     void Update();
 
 private slots:
@@ -35,10 +37,11 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QStackedWidget *stackedWidget;
-
+    QTimer *timerMSG;
+    TemporaryMessageController *temporaryMessageController;
     void resizeEvent(QResizeEvent *event);
     void AddInvoiceEntity(InvoiceEntity* entity, int number);
-    void SaveInvoice(InvoiceEntity* entity, QString pathfile);
+    void SaveInvoice(InvoiceEntity* entity, QString pathfile); 
 
 };
 #endif // MAINWINDOW_H

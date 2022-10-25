@@ -2,6 +2,8 @@
 #include "supplierspage.h"
 #include "ui_supplierspage.h"
 
+#include <Pages/mainpage.h>
+
 SuppliersPage::SuppliersPage(QWidget *parent,QStackedWidget *stackedWidget) :
     QWidget(parent),
     ui(new Ui::SuppliersPage)
@@ -67,6 +69,8 @@ void SuppliersPage::Update()
 
 void SuppliersPage::on_buttonBack_clicked()
 {
+    auto w = (MainPage*)stackedWidget->widget((int)PageNumber::MAIN_MENU);
+    w->Start();
     stackedWidget->setCurrentIndex((int)PageNumber::MAIN_MENU);
 }
 

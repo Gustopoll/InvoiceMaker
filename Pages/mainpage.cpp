@@ -22,17 +22,12 @@ MainPage::MainPage(QWidget *parent, QStackedWidget *stackedWidget)
     CustomStyle cs;
     ui->buttonNewInvoice->setStyleSheet(cs.ClassicButtonStyle());
 
-    //PDFInvoiceGenerator *gen = new PDFInvoiceGenerator();
-    //gen->Generate();
-
+    ui->labelMSG->setVisible(false);
     ui->treeWidget->setIconSize(QSize(30,30));
     ui->treeWidget->setColumnHidden(0,true);
 
-    int month = QDate::currentDate().month();
-    ui->comboBoxMonth->setCurrentIndex(month);
-    ui->spinBoxYear->setValue(QDate::currentDate().year());
-
-    Update();
+    temporaryMessageController = new TemporaryMessageController(this,20);
+    Start();
 }
 
 MainPage::~MainPage()
@@ -40,11 +35,23 @@ MainPage::~MainPage()
     delete ui;
 }
 
+void MainPage::Start()
+{
+    ui->treeWidget->clear();
+    int month = QDate::currentDate().month();
+    ui->comboBoxMonth->setCurrentIndex(month);
+
+    ui->spinBoxYear->setValue(QDate::currentDate().year());
+    SupplierController supplierController;
+    supplierController.SetSuppliers("Všetci",ui->comboBoxSupplier);
+    Update();
+}
+
+
 void MainPage::Update()
 {
     ui->treeWidget->clear();
     SupplierController supplierController;
-    supplierController.SetSuppliers("Všetci",ui->comboBoxSupplier);
 
     int idSupplier = 0;
     auto entity = supplierController.GetEntityByIndex(ui->comboBoxSupplier->currentIndex()-1);
@@ -94,6 +101,7 @@ void MainPage::SaveInvoice(InvoiceEntity *entity, QString pathfile)
 {
     PDFInvoiceGenerator gen(pathfile);
     gen.Generate(entity);
+    temporaryMessageController->StartVisibleLabel(ui->labelMSG);
 }
 
 void MainPage::on_buttonNewInvoice_clicked()
@@ -119,12 +127,10 @@ void MainPage::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
             return;
         dirpath += "/invoice.pdf";
         SaveInvoice(entity,dirpath);
-        //delete entity;
         return;
     }
     if (column == 7) //delete invoice
     {
-        delete entity;
         return;
     }
 

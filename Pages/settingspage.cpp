@@ -1,3 +1,4 @@
+#include "mainpage.h"
 #include "settingspage.h"
 #include "ui_settingspage.h"
 
@@ -45,6 +46,8 @@ void SettingsPage::on_buttonSave_clicked()
         auto q = AddSettingsQuerry();
         q.Add(entity);
         qDebug() << q.GetLastError();
+        auto w = (MainPage*)stackedWidget->widget((int)PageNumber::MAIN_MENU);
+        w->Start();
         stackedWidget->setCurrentIndex((int)PageNumber::MAIN_MENU);
     }
     else
@@ -55,6 +58,8 @@ void SettingsPage::on_buttonSave_clicked()
         qDebug() << q.GetLastError();
         delete entity;
         delete e;
+        auto w = (MainPage*)stackedWidget->widget((int)PageNumber::MAIN_MENU);
+        w->Start();
         stackedWidget->setCurrentIndex((int)PageNumber::MAIN_MENU);
     }
 }
@@ -64,6 +69,8 @@ void SettingsPage::on_buttonBack_clicked()
     on_comboBoxV_currentIndexChanged(0);
     on_comboBoxDday_currentIndexChanged(0);
     settingsController->SetFromDB();
+    auto w = (MainPage*)stackedWidget->widget((int)PageNumber::MAIN_MENU);
+    w->Start();
     stackedWidget->setCurrentIndex((int)PageNumber::MAIN_MENU);
 }
 

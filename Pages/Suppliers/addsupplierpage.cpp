@@ -87,8 +87,8 @@ void AddSupplierPage::on_buttonSave_clicked()
 
     Saving_event();
 
-    auto w = (MainPage*)stackedWidget->widget((int)PageNumber::MAIN_MENU);
-    w->Update();
+    //auto w = (MainPage*)stackedWidget->widget((int)PageNumber::MAIN_MENU);
+    //w->Start();
     BackToSuppliers();
 }
 

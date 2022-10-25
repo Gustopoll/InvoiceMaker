@@ -35,6 +35,9 @@ QList<InvoiceEntity *> GetInvoiceQuerry::GetAllWhere(int year, int month, int id
 
     QString querry = "SELECT * FROM " + nameTable + " WHERE "
             "dateV BETWEEN '" + helper.toString(1,month,year) + "' AND '" +  helper.toString(31,lastMonth,year) + "' ";
+
+    if (idSupplier != 0) // this option allo to get specific invoices
+        querry += "AND idSupplier = " + QString::number(idSupplier);
     qDebug() << querry;
     return Get(querry);
 }

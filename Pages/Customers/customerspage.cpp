@@ -3,6 +3,8 @@
 #include "questiondeletecustomerpage.h"
 #include "ui_customerspage.h"
 
+#include <Pages/mainpage.h>
+
 CustomersPage::CustomersPage(QWidget *parent,QStackedWidget *stackedWidget) :
     QWidget(parent),
     ui(new Ui::CustomersPage)
@@ -60,6 +62,8 @@ void CustomersPage::on_buttonAddCustomer_clicked()
 
 void CustomersPage::on_buttonBack_clicked()
 {
+    auto w = (MainPage*)stackedWidget->widget((int)PageNumber::MAIN_MENU);
+    w->Start();
     stackedWidget->setCurrentIndex((int)PageNumber::MAIN_MENU);
 }
 

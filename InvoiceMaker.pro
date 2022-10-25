@@ -24,6 +24,7 @@ SOURCES += \
     Controller/requireditemscontroller.cpp \
     Controller/settingscontroller.cpp \
     Controller/suppliercontroller.cpp \
+    Controller/temporarymessagecontroller.cpp \
     Entities/adressentity.cpp \
     Entities/bankinfoentity.cpp \
     Entities/customerentity.cpp \
@@ -84,6 +85,7 @@ HEADERS += \
     Controller/requireditemscontroller.h \
     Controller/settingscontroller.h \
     Controller/suppliercontroller.h \
+    Controller/temporarymessagecontroller.h \
     Entities/InvoiceType.h \
     Entities/PaymentMethod.h \
     Entities/adressentity.h \
