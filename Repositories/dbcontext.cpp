@@ -123,7 +123,6 @@ QString DBContext::CreateTables()
 
     qDebug() << "invoice" << q.lastError().text();
 
-    //q.exec("DROP TABLE item;");
     q.exec("CREATE TABLE IF NOT EXISTS item"
               "(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
               "idInvoice INTEGER,"

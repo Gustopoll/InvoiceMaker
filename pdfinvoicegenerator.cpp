@@ -48,7 +48,7 @@ void PDFInvoiceGenerator::Generate(InvoiceEntity *invoice)
     OtherGenerate(invoice);
 
     painter->end();
-    delete painter;
+    //delete painter; // delete only from QString
 
 }
 
@@ -129,10 +129,10 @@ void PDFInvoiceGenerator::OtherGenerate(InvoiceEntity *invoice)
     painter->drawText(leftBorder + 400,sameLine,"Suma na úhradu");
 
     sameLine = newLine();
-    painter->drawText(leftBorder,sameLine,"NL66ABNA1272753638");
-    painter->drawText(leftBorder + 200,sameLine,"UNCRSKBX");
-    painter->drawText(leftBorder + 300,sameLine,"2622");
-    painter->drawText(leftBorder + 400,sameLine,"93 542,22 EUR");
+    painter->drawText(leftBorder,sameLine,invoice->getSupplierSaved()->getBankinfo()->getIBAN());
+    painter->drawText(leftBorder + 200,sameLine,invoice->getSupplierSaved()->getBankinfo()->getSWIFT());
+    painter->drawText(leftBorder + 300,sameLine,invoice->getSupplierSaved()->getBankinfo()->getVS());
+    painter->drawText(leftBorder + 400,sameLine, QString::number(invoice->GetTotalPrice()) + " EUR");
 
     newLine(); newLine();
     sameLine = newLine();

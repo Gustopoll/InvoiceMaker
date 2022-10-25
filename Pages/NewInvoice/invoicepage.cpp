@@ -36,6 +36,10 @@ InvoicePage::InvoicePage(QWidget *parent, QStackedWidget *stackedWidget) :
     ui->buttonSave->setIcon(QIcon(":/icon/Data/save.png"));
     ui->buttonSavePDF->setIcon(QIcon(":/icon/Data/savePDF.png"));
 
+    ui->buttonX1->setStyleSheet(cs.DeleteButtonStyle());
+    ui->buttonX2->setStyleSheet(cs.DeleteButtonStyle());
+    ui->buttonX3->setStyleSheet(cs.DeleteButtonStyle());
+
     ui->buttonAddItem->setStyleSheet(cs.ClassicButtonStyle());
 
     settingsController = new SettingsController();
@@ -184,6 +188,7 @@ void InvoicePage::on_buttonSave_clicked()
 
     AddInvoiceQuerry q;
     q.Add(invoice);
+    qDebug() << q.GetLastError();
 
     delete customerEntity;
     delete supplierEntity;
@@ -369,3 +374,18 @@ void InvoicePage::on_doubleSpinBoxDPH_valueChanged(double arg1)
     ui->doubleSpinBoxDPH_item->setValue(arg1);
 }
 
+
+void InvoicePage::on_buttonX1_clicked()
+{
+    stackedWidget->setCurrentIndex((int)PageNumber::MAIN_MENU);
+}
+
+void InvoicePage::on_buttonX2_clicked()
+{
+    stackedWidget->setCurrentIndex((int)PageNumber::MAIN_MENU);
+}
+
+void InvoicePage::on_buttonX3_clicked()
+{
+    stackedWidget->setCurrentIndex((int)PageNumber::MAIN_MENU);
+}

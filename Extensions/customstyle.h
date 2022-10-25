@@ -13,6 +13,7 @@ public:
     QString GreenButtonStyle();
 
     QString RedBackGround();
+    QString DeleteButtonStyle();
 
     QString DateStyle();
     QString ComboBoxStyle();

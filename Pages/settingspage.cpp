@@ -12,7 +12,7 @@ SettingsPage::SettingsPage(QWidget *parent,QStackedWidget *stackedWidget) :
     CustomStyle cs;
     ui->buttonSave->setStyleSheet(cs.GreenButtonStyle());
     ui->buttonBack->setStyleSheet(cs.RedButtonStyle());
-
+    ui->buttonDeleteAll->setStyleSheet(cs.RedButtonStyle());
 
     settingsController = new SettingsController();
     settingsController->setComboBoxV(ui->comboBoxV);

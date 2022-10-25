@@ -137,6 +137,17 @@ QString CustomStyle::RedBackGround()
     return "background-color: rgb(255, 0, 0);";
 }
 
+QString CustomStyle::DeleteButtonStyle()
+{
+    return "QPushButton \
+        {\
+         border-image: url(:/icon/Data/eraseNoBorder.png);\
+        } \
+    QPushButton::hover \
+    { \
+       border-image: url(:/icon/Data/erase.png);\
+    } ";
+}
 QString CustomStyle::DateStyle()
 {
     QString string = " \

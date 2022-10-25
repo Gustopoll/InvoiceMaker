@@ -52,6 +52,12 @@ private slots:
 
 
 
+    void on_buttonX1_clicked();
+
+    void on_buttonX2_clicked();
+
+    void on_buttonX3_clicked();
+
 private:
     Ui::InvoicePage *ui;
     QStackedWidget *stackedWidget;

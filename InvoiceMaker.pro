@@ -65,6 +65,7 @@ SOURCES += \
     Repositories/Querry/GetQuerry/getcustomerquerry.cpp \
     Repositories/Querry/GetQuerry/getcustomersavedquerry.cpp \
     Repositories/Querry/GetQuerry/getinvoicequerry.cpp \
+    Repositories/Querry/GetQuerry/getitemquerry.cpp \
     Repositories/Querry/GetQuerry/getquerry.cpp \
     Repositories/Querry/GetQuerry/getsettingsquerry.cpp \
     Repositories/Querry/GetQuerry/getsupplierquerry.cpp \
@@ -129,6 +130,7 @@ HEADERS += \
     Repositories/Querry/GetQuerry/getcustomerquerry.h \
     Repositories/Querry/GetQuerry/getcustomersavedquerry.h \
     Repositories/Querry/GetQuerry/getinvoicequerry.h \
+    Repositories/Querry/GetQuerry/getitemquerry.h \
     Repositories/Querry/GetQuerry/getquerry.h \
     Repositories/Querry/GetQuerry/getsettingsquerry.h \
     Repositories/Querry/GetQuerry/getsupplierquerry.h \

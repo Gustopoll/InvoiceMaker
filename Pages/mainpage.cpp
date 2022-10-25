@@ -62,9 +62,14 @@ void MainPage::Update()
     GetInvoiceQuerry q;
     auto list = q.GetAllWhere(ui->spinBoxYear->value(),ui->comboBoxMonth->currentIndex(),idSupplier);
     qDebug() << q.GetLastError();
-    for (int i = 0; i < list.size(); i++)
-        AddInvoiceEntity(list[i],i+1);
 
+    double totalPrice = 0;
+    for (int i = 0; i < list.size(); i++)
+    {
+        AddInvoiceEntity(list[i],i+1);
+        totalPrice += list[i]->GetTotalPrice();
+    }
+    ui->labelTotalPrice->setText("Celková cena: " + QString::number(totalPrice) + " €");
 }
 
 void MainPage::resizeEvent(QResizeEvent *event)

@@ -1,5 +1,6 @@
 #include "getcustomersavedquerry.h"
 #include "getinvoicequerry.h"
+#include "getitemquerry.h"
 #include "getsuppliersavedquerry.h"
 
 #include <Extensions/datehelper.h>
@@ -71,11 +72,11 @@ QList<InvoiceEntity*> GetInvoiceQuerry::Get(QString querry)
         auto customer = cq.GetOneById(q.value("idCustomerSaved").toInt());
         entity->setCustomerSaved(customer);
 
-        /*
+        GetItemQuerry itemQuerry;
+        auto items = itemQuerry.GetAllByInvoiceID(entity->getId());
         for (int i = 0; i < items.size(); i++)
             entity->addItem(items[i]);
 
-        */
         listEntities.push_back(entity);
     }
     return listEntities;

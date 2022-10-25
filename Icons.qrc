@@ -8,5 +8,7 @@
         <file>Data/supplier.png</file>
         <file>Data/add.png</file>
         <file>Data/factureIcon.png</file>
+        <file>Data/erase.png</file>
+        <file>Data/eraseNoBorder.png</file>
     </qresource>
 </RCC>
