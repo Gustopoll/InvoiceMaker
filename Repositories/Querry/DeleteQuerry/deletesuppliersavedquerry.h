@@ -7,6 +7,8 @@ class DeleteSupplierSavedQuerry : public DeleteSupplierQuerry
 {
 public:
     DeleteSupplierSavedQuerry();
+
+    bool Delete(int id);
 };
 
 #endif // DELETESUPPLIERSAVEDQUERRY_H

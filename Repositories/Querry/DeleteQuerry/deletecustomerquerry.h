@@ -2,6 +2,7 @@
 #define DELETECUSTOMERQUERRY_H
 
 #include <Repositories/Querry/DeleteQuerry/deletequerry.h>
+#include <Entities/customerentity.h>
 
 class DeleteCustomerQuerry : public DeleteQuerry
 {

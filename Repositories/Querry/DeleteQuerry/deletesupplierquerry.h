@@ -2,6 +2,7 @@
 #define DELETESUPPLIERQUERRY_H
 
 #include <Repositories/Querry/DeleteQuerry/deletequerry.h>
+#include <Entities/supplierentity.h>
 
 class DeleteSupplierQuerry : public DeleteQuerry
 {

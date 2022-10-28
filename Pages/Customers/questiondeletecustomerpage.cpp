@@ -41,11 +41,12 @@ void QuestionDeleteCustomerPage::on_buttonYes_clicked()
         DeleteCustomerQuerry q;
         q.Delete(idCustomer);
         qDebug() << q.GetLastError();
+        //TODO delete invoice by id customer
     }
     else
     {
-        UpdateCustomerQuerry q;
-        q.UpdateParameter(idCustomer,"isdeleted","1");
+        DeleteCustomerQuerry q;
+        q.Delete(idCustomer);
         qDebug() << q.GetLastError();
     }
 

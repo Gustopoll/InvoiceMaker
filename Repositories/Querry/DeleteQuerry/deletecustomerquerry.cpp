@@ -1,4 +1,5 @@
 #include "deletecustomerquerry.h"
+#include <Repositories/Querry/GetQuerry/getcustomerquerry.h>
 
 DeleteCustomerQuerry::DeleteCustomerQuerry()
 {
@@ -7,6 +8,11 @@ DeleteCustomerQuerry::DeleteCustomerQuerry()
 
 bool DeleteCustomerQuerry::Delete(int id)
 {
-    //TODO delete also adress
-    return DeleteQuerry::Delete(id, nameTable);
+    bool value = false;
+    GetCustomerQuerry q;
+    auto adressID = q.GetAdressId(id);
+
+    value |= DeleteAdress(adressID);
+    value |= DeleteQuerry::Delete(id, nameTable);
+    return value;
 }

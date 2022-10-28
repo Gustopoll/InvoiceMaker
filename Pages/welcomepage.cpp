@@ -13,6 +13,8 @@
 #include "Pages/Customers/customerspage.h"
 #include "Pages/Customers/questiondeletecustomerpage.h"
 
+#include <Pages/Invoice/questiondeleteinvoicepage.h>
+
 WelcomePage::WelcomePage(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::WelcomePage)
@@ -96,6 +98,9 @@ void WelcomePage::LoadAllPages()
 
         QuestionDeleteCustomerPage* question2 = new QuestionDeleteCustomerPage(this,ui->stackedWidget);
         ui->stackedWidget->addWidget(question2);
+
+        QuestionDeleteInvoicePage *question3 = new QuestionDeleteInvoicePage(this,ui->stackedWidget);
+        ui->stackedWidget->addWidget(question3);
 
         isLoaded = true;
     }

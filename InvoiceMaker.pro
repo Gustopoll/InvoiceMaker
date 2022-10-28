@@ -39,6 +39,7 @@ SOURCES += \
     Pages/Customers/addcustomerpage.cpp \
     Pages/Customers/customerspage.cpp \
     Pages/Customers/questiondeletecustomerpage.cpp \
+    Pages/Invoice/questiondeleteinvoicepage.cpp \
     Pages/NewInvoice/invoicepage.cpp \
     Pages/Suppliers/addsupplierpage.cpp \
     Pages/Suppliers/questionpage.cpp \
@@ -103,6 +104,7 @@ HEADERS += \
     Pages/Customers/addcustomerpage.h \
     Pages/Customers/customerspage.h \
     Pages/Customers/questiondeletecustomerpage.h \
+    Pages/Invoice/questiondeleteinvoicepage.h \
     Pages/NewInvoice/invoicepage.h \
     Pages/PagesNumbers.h \
     Pages/Suppliers/addsupplierpage.h \
@@ -147,6 +149,7 @@ FORMS += \
     Pages/Customers/addcustomerpage.ui \
     Pages/Customers/customerspage.ui \
     Pages/Customers/questiondeletecustomerpage.ui \
+    Pages/Invoice/questiondeleteinvoicepage.ui \
     Pages/NewInvoice/invoicepage.ui \
     Pages/Suppliers/addsupplierpage.ui \
     Pages/Suppliers/questionpage.ui \

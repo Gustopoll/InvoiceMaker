@@ -37,11 +37,12 @@ void QuestionPage::on_buttonYes_clicked()
         DeleteSupplierQuerry q;
         q.Delete(id);
         qDebug() << q.GetLastError();
+        //TODO delete invoice by id supplier
     }
     else
     {
-        UpdateSupplierQuerry q;
-        q.UpdateParameter(id,"isdeleted","1");
+        DeleteSupplierQuerry q;
+        q.Delete(id);
         qDebug() << q.GetLastError();
     }
     ui->checkBox->setCheckState(Qt::CheckState::Unchecked);

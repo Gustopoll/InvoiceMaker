@@ -56,9 +56,7 @@ void AddCustomerPage::Saving_event()
     {
         auto entity = CreateCustomerEntity();
         AddCustomerQuerry q;
-        AddCustomerSavedQuerry wq;
         q.Add(entity);
-        wq.Add(entity);
         qDebug() << q.GetLastError();
     }
     else

@@ -95,7 +95,6 @@ QString DBContext::CreateTables()
 
     qDebug() << "customersaved" << q.lastError().text();
 
-    //q.exec("DROP TABLE settings;");
     q.exec("CREATE TABLE IF NOT EXISTS settings"
               "(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
               "indexV INTEGER,"

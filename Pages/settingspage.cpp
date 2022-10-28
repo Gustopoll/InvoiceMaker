@@ -29,6 +29,8 @@ SettingsPage::SettingsPage(QWidget *parent,QStackedWidget *stackedWidget) :
         qDebug() << "error";
 
     settingsController->SetFromDB();
+
+
 }
 
 SettingsPage::~SettingsPage()

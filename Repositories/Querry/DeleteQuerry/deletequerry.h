@@ -9,6 +9,9 @@ public:
     DeleteQuerry();
 
     bool Delete(int id, QString nameTable);
+
+    bool DeleteAdress(int id);
+    bool DeleteBankInfo(int id);
 };
 
 #endif // DELETEQUERRY_H

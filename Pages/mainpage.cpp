@@ -11,6 +11,7 @@
 #include <Repositories/Querry/GetQuerry/getsupplierquerry.h>
 #include <Controller/suppliercontroller.h>
 #include <Pages/NewInvoice/invoicepage.h>
+#include <Pages/Invoice/questiondeleteinvoicepage.h>
 
 MainPage::MainPage(QWidget *parent, QStackedWidget *stackedWidget)
     : QMainWindow(parent)
@@ -136,6 +137,10 @@ void MainPage::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
     }
     if (column == 7) //delete invoice
     {
+        auto w = (QuestionDeleteInvoicePage*)stackedWidget->widget((int)PageNumber::QUESTION_INVOICE);
+        w->SetName(entity->getSupplierSaved()->getName());
+        w->SetID(entity->getId());
+        stackedWidget->setCurrentIndex((int)PageNumber::QUESTION_INVOICE);
         return;
     }
 

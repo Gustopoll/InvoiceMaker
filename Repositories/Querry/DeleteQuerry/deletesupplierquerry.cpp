@@ -1,4 +1,5 @@
 #include "deletesupplierquerry.h"
+#include <Repositories/Querry/GetQuerry/getsupplierquerry.h>
 
 DeleteSupplierQuerry::DeleteSupplierQuerry()
 {
@@ -7,6 +8,13 @@ DeleteSupplierQuerry::DeleteSupplierQuerry()
 
 bool DeleteSupplierQuerry::Delete(int id)
 {
-    //TODO delete also adress and payer
-    return DeleteQuerry::Delete(id, nameTable);
+    bool value = false;
+    GetSupplierQuerry q;
+    auto addressID = q.GetAdressId(id);
+    auto bankinfoID = q.GetBankInfoId(id);
+
+    value |= DeleteAdress(addressID);
+    value |= DeleteBankInfo(bankinfoID);
+    value |= DeleteQuerry::Delete(id, nameTable);
+    return value;
 }

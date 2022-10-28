@@ -7,6 +7,8 @@ class DeleteCustomerSavedQuerry : public DeleteCustomerQuerry
 {
 public:
     DeleteCustomerSavedQuerry();
+
+    bool Delete(int id);
 };
 
 #endif // DELETECUSTOMERSAVEDQUERRY_H
