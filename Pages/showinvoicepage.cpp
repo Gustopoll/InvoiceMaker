@@ -12,7 +12,6 @@ ShowInvoicePage::ShowInvoicePage(QWidget *parent,QStackedWidget *stackedWidget) 
 
     CustomStyle cs;
     ui->buttonBack->setStyleSheet(cs.ClassicButtonStyle());
-    currentScrollValue = 0;
 }
 
 ShowInvoicePage::~ShowInvoicePage()
@@ -22,30 +21,24 @@ ShowInvoicePage::~ShowInvoicePage()
 
 void ShowInvoicePage::wheelEvent(QWheelEvent *event)
 {
-    if(event->angleDelta().y() > 0) //wheel up
-        currentScrollValue += 50;
-    else //wheel down
-        currentScrollValue -= 50;
+    if (event->delta() > 0)
+    {
+        ui->graphicsView->scrollValue += 50;
+        if (ui->graphicsView->scrollValue > 90)
+            ui->graphicsView->scrollValue = 90;
+    }
+    else
+    {
+        ui->graphicsView->scrollValue -= 50;
+    }
 
-    if (currentScrollValue >= 0)
-        currentScrollValue = 0;
-
-    ui->graphicsView->move(0,currentScrollValue);
-    ui->verticalScrollBar->setValue(-currentScrollValue/50);
-    qDebug() << currentScrollValue;
+    ui->verticalScrollBar->setValue(-ui->graphicsView->scrollValue/50);
     ui->graphicsView->update();
 }
 
 void ShowInvoicePage::SetInvoice(InvoiceEntity *invoice)
 {
-    qDebug() << "set from showinvoice";
     ui->graphicsView->SetInvoice(invoice);
-}
-
-void ShowInvoicePage::setValue(int i)
-{
-    ui->graphicsView->move(0,-i*50);
-    ui->graphicsView->update();
 }
 
 void ShowInvoicePage::on_buttonBack_clicked()
@@ -55,5 +48,6 @@ void ShowInvoicePage::on_buttonBack_clicked()
 
 void ShowInvoicePage::on_verticalScrollBar_sliderMoved(int position)
 {
-    ui->graphicsView->move(0,-position*50);
+    ui->graphicsView->scrollValue = (-position * 50) +90;
+    ui->graphicsView->update();
 }

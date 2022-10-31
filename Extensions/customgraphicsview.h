@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QPainter>
 #include <QPaintEvent>
+#include <QGraphicsView>
 
 #include "../pdfinvoicegenerator.h"
 
@@ -13,9 +14,9 @@ class CustomGraphicsView : public QWidget
 public:
     explicit CustomGraphicsView(QWidget *parent = nullptr);
 
-    void paintEvent(QPaintEvent *e);
+    virtual void paintEvent(QPaintEvent *e) override;
     void SetInvoice(InvoiceEntity *invoice);
-signals:
+    int scrollValue = 90;
 
 private:
     InvoiceEntity *invoice;

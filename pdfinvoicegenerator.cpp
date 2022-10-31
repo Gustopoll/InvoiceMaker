@@ -26,6 +26,7 @@ PDFInvoiceGenerator::PDFInvoiceGenerator(QString pathfile)
 PDFInvoiceGenerator::PDFInvoiceGenerator(QPainter *paint)
 {
     painter = paint;
+    painter->fillRect(0,0,5000,5000,QBrush(Qt::white));
     bold = QFont("Calibri", 11);
     bold.setBold(true);
     classic = QFont("Calibri", 11);
@@ -78,7 +79,7 @@ void PDFInvoiceGenerator::SupplierGenerate(SupplierEntity *entity)
 
 void PDFInvoiceGenerator::CustomerGenerate(CustomerEntity *entity)
 {
-    countLine = 135; // nový stĺpec
+    countLine -= 155; // nový stĺpec (135)
     int len = 500; // od kade začína pravý stlpec (hodnota x)
 
     painter->setFont(bold);
@@ -150,4 +151,9 @@ int PDFInvoiceGenerator::newLine()
 {
     countLine += 20;
     return countLine;
+}
+
+void PDFInvoiceGenerator::scroll(int dx)
+{
+    countLine = dx;
 }

@@ -18,6 +18,7 @@ public:
     PDFInvoiceGenerator(QString pathfile);
     PDFInvoiceGenerator(QPainter *frame);
 
+    void scroll(int dx);
     void Generate(InvoiceEntity *invoice);
 private:
 
@@ -42,7 +43,6 @@ private:
     void OtherGenerate(InvoiceEntity *invoice);
 
     int newLine();
-
 };
 
 #endif // PDFINVOICEGENERATOR_H

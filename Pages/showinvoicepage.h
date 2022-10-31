@@ -23,15 +23,12 @@ public:
     void SetInvoice(InvoiceEntity *invoice);
 private slots:
     void on_buttonBack_clicked();
-    void setValue(int i);
 
     void on_verticalScrollBar_sliderMoved(int position);
 
 private:
     Ui::ShowInvoicePage *ui;
     QStackedWidget *stackedWidget;
-
-    int currentScrollValue = 0;
 };
 
 #endif // SHOWINVOICEPAGE_H
