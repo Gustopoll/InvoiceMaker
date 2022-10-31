@@ -15,6 +15,8 @@
 
 #include <Pages/Invoice/questiondeleteinvoicepage.h>
 
+#include <Pages/DeleteAllQuestion/deleteallquestion.h>
+
 WelcomePage::WelcomePage(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::WelcomePage)
@@ -101,6 +103,9 @@ void WelcomePage::LoadAllPages()
 
         QuestionDeleteInvoicePage *question3 = new QuestionDeleteInvoicePage(this,ui->stackedWidget);
         ui->stackedWidget->addWidget(question3);
+
+        DeleteAllQuestion *deleteAll = new DeleteAllQuestion(this,ui->stackedWidget);
+        ui->stackedWidget->addWidget(deleteAll);
 
         isLoaded = true;
     }

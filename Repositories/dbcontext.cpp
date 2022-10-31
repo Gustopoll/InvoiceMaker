@@ -16,17 +16,7 @@ bool DBContext::Connect()
 QString DBContext::CreateTables()
 {
     QSqlQuery q;
-    /*
-    q.exec("DROP TABLE supplier;");
-    q.exec("DROP TABLE suppliersaved;");
-    q.exec("DROP TABLE adress;");
-    q.exec("DROP TABLE bankinfo;");
-    q.exec("DROP TABLE customer;");
-    q.exec("DROP TABLE customersaved;");
-    q.exec("DROP TABLE settings;");
-    q.exec("DROP TABLE invoice;");
-    q.exec("DROP TABLE item;");
-    // */
+
     q.exec("CREATE TABLE IF NOT EXISTS supplier"
               "(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
               "name VARCHAR(255),"
@@ -53,7 +43,6 @@ QString DBContext::CreateTables()
 
     qDebug() << "suppliersaved" << q.lastError().text();
 
-    //q.exec("DROP TABLE adress;");
     q.exec("CREATE TABLE IF NOT EXISTS adress"
               "(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
                "street VARCHAR(255),"
@@ -64,7 +53,6 @@ QString DBContext::CreateTables()
 
     qDebug() << "adress" << q.lastError().text();
 
-    //q.exec("DROP TABLE bankinfo;");
     q.exec("CREATE TABLE IF NOT EXISTS bankinfo"
               "(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
                "IBAN VARCHAR(255),"
@@ -133,6 +121,23 @@ QString DBContext::CreateTables()
               "description VARCHAR(512));");
 
     qDebug() << "item" << q.lastError().text();
+
+    return q.lastError().text();
+}
+
+QString DBContext::DeleteTables()
+{
+    QSqlQuery q;
+
+    q.exec("DROP TABLE supplier;");
+    q.exec("DROP TABLE suppliersaved;");
+    q.exec("DROP TABLE adress;");
+    q.exec("DROP TABLE bankinfo;");
+    q.exec("DROP TABLE customer;");
+    q.exec("DROP TABLE customersaved;");
+    q.exec("DROP TABLE settings;");
+    q.exec("DROP TABLE invoice;");
+    q.exec("DROP TABLE item;");
 
     return q.lastError().text();
 }

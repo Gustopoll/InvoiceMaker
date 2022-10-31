@@ -13,6 +13,7 @@ public:
     bool Connect();
 
     QString CreateTables();
+    QString DeleteTables();
 
 private:
     QSqlDatabase db;

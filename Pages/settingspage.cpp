@@ -119,3 +119,8 @@ void SettingsPage::on_comboBoxStyle_currentTextChanged(const QString &arg1)
 {
     QApplication::setStyle(arg1);
 }
+
+void SettingsPage::on_buttonDeleteAll_clicked()
+{
+    stackedWidget->setCurrentIndex((int)PageNumber::QUESTION_DELETE_ALL);
+}

@@ -35,6 +35,8 @@ private slots:
 
     void on_comboBoxStyle_currentTextChanged(const QString &arg1);
 
+    void on_buttonDeleteAll_clicked();
+
 private:
     Ui::SettingsPage *ui;
     QStackedWidget *stackedWidget;

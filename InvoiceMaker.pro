@@ -39,6 +39,7 @@ SOURCES += \
     Pages/Customers/addcustomerpage.cpp \
     Pages/Customers/customerspage.cpp \
     Pages/Customers/questiondeletecustomerpage.cpp \
+    Pages/DeleteAllQuestion/deleteallquestion.cpp \
     Pages/Invoice/questiondeleteinvoicepage.cpp \
     Pages/NewInvoice/invoicepage.cpp \
     Pages/Suppliers/addsupplierpage.cpp \
@@ -60,6 +61,7 @@ SOURCES += \
     Repositories/Querry/DeleteQuerry/deletecustomerquerry.cpp \
     Repositories/Querry/DeleteQuerry/deletecustomersavedquerry.cpp \
     Repositories/Querry/DeleteQuerry/deleteinvoicequerry.cpp \
+    Repositories/Querry/DeleteQuerry/deleteitemquerry.cpp \
     Repositories/Querry/DeleteQuerry/deletequerry.cpp \
     Repositories/Querry/DeleteQuerry/deletesupplierquerry.cpp \
     Repositories/Querry/DeleteQuerry/deletesuppliersavedquerry.cpp \
@@ -104,6 +106,7 @@ HEADERS += \
     Pages/Customers/addcustomerpage.h \
     Pages/Customers/customerspage.h \
     Pages/Customers/questiondeletecustomerpage.h \
+    Pages/DeleteAllQuestion/deleteallquestion.h \
     Pages/Invoice/questiondeleteinvoicepage.h \
     Pages/NewInvoice/invoicepage.h \
     Pages/PagesNumbers.h \
@@ -126,6 +129,7 @@ HEADERS += \
     Repositories/Querry/DeleteQuerry/deletecustomerquerry.h \
     Repositories/Querry/DeleteQuerry/deletecustomersavedquerry.h \
     Repositories/Querry/DeleteQuerry/deleteinvoicequerry.h \
+    Repositories/Querry/DeleteQuerry/deleteitemquerry.h \
     Repositories/Querry/DeleteQuerry/deletequerry.h \
     Repositories/Querry/DeleteQuerry/deletesupplierquerry.h \
     Repositories/Querry/DeleteQuerry/deletesuppliersavedquerry.h \
@@ -149,6 +153,7 @@ FORMS += \
     Pages/Customers/addcustomerpage.ui \
     Pages/Customers/customerspage.ui \
     Pages/Customers/questiondeletecustomerpage.ui \
+    Pages/DeleteAllQuestion/deleteallquestion.ui \
     Pages/Invoice/questiondeleteinvoicepage.ui \
     Pages/NewInvoice/invoicepage.ui \
     Pages/Suppliers/addsupplierpage.ui \

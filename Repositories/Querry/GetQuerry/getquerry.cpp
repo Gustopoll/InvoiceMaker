@@ -20,7 +20,7 @@ int GetQuerry::GetAdressId(int id, QString nameTable)
 int GetQuerry::GetBankInfoId(int id, QString nameTable)
 {
     QSqlQuery q;
-    q.prepare("SELECT idadress FROM " + nameTable + " WHERE id = :idValue");
+    q.prepare("SELECT idbankinfo FROM " + nameTable + " WHERE id = :idValue");
     q.bindValue(":idValue",id);
 
     q.exec();
