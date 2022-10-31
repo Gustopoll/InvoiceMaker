@@ -14,8 +14,8 @@ bool AddSettingsQuerry::Add(SettingsEntity *entity)
 
     DateHelper helper;
     QSqlQuery q;
-    q.prepare("INSERT INTO " + nameTable + " (indexV, indexD, indexD2, indexS, dateV, dateD, dateS, DPH) "
-    "VALUES (:indexV_value, :indexD_value, :indexD2_value, :indexS_value, :dateV_value, :dateD_value, :dateS_value, :DPH_value);");
+    q.prepare("INSERT INTO " + nameTable + " (indexV, indexD, indexD2, indexS, dateV, dateD, dateS, DPH, indexStyle) "
+    "VALUES (:indexV_value, :indexD_value, :indexD2_value, :indexS_value, :dateV_value, :dateD_value, :dateS_value, :DPH_value, :indexStyle_value);");
 
     q.bindValue(":indexV_value",entity->getIndexV());
     q.bindValue(":indexD_value",entity->getIndexD());
@@ -25,6 +25,7 @@ bool AddSettingsQuerry::Add(SettingsEntity *entity)
     q.bindValue(":dateD_value",helper.toStringDB(entity->getDateD()));
     q.bindValue(":dateS_value",helper.toStringDB(entity->getDateS()));
     q.bindValue(":DPH_value",entity->getDPH());
+    q.bindValue(":indexStyle_value",entity->getIndexStyle());
 
     q.exec();
 

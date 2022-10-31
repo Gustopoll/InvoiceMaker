@@ -94,3 +94,13 @@ void SettingsEntity::setDPH(double value)
 {
     DPH = value;
 }
+
+int SettingsEntity::getIndexStyle()
+{
+    return indexStyle;
+}
+
+void SettingsEntity::setIndexStyle(int value)
+{
+    indexStyle = value;
+}

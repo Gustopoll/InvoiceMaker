@@ -32,6 +32,8 @@ public:
     void comboBoxDdayUpate(int index);
     void comboBoxVUpdate(int index);
 
+    void setComboBoxStyle(QComboBox *value);
+
 private:
     void UpdateDDate();
     void UpdateSDate();
@@ -46,6 +48,8 @@ private:
     QDoubleSpinBox* doubleSpinBoxDPH;
     QLabel* labelPart1;
     QLabel* labelPart2;
+
+    QComboBox* comboBoxStyle;
 };
 
 #endif // SETTINGSCONTROLLER_H

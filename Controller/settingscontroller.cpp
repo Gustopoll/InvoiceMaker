@@ -1,7 +1,7 @@
 #include "settingscontroller.h"
 
 #include <Extensions/datehelper.h>
-
+#include <QStyleFactory>
 #include <Repositories/Querry/GetQuerry/getsettingsquerry.h>
 
 SettingsController::SettingsController()
@@ -16,6 +16,7 @@ SettingsController::SettingsController()
     doubleSpinBoxDPH = nullptr;
     labelPart1 = nullptr;
     labelPart2 = nullptr;
+    comboBoxStyle = nullptr;
 }
 
 bool SettingsController::Build()
@@ -96,6 +97,12 @@ SettingsEntity *SettingsController::CreateEnity()
     entity->setDateD(dateEditD->date());
     entity->setDateS(dateEditS->date());
     entity->setDPH(doubleSpinBoxDPH->value());
+    if (comboBoxStyle != nullptr)
+    {
+        entity->setIndexStyle(comboBoxStyle->currentIndex());
+    }
+    else
+        entity->setIndexStyle(0);
     return entity;
 }
 
@@ -117,6 +124,12 @@ void SettingsController::SetSettingsEntity(SettingsEntity *entity)
         dateEditS->setDate(entity->getDateS());
 
     doubleSpinBoxDPH->setValue(entity->getDPH());
+    if (comboBoxStyle != nullptr)
+    {
+        auto keys = QStyleFactory::keys();
+        if (entity->getIndexStyle() < keys.size())
+            comboBoxStyle->setCurrentIndex(entity->getIndexStyle());
+    }
     delete entity;
 
 }
@@ -124,7 +137,9 @@ void SettingsController::SetSettingsEntity(SettingsEntity *entity)
 void SettingsController::SetFromDB()
 {
     GetSettingsQuerry q;
-    SetSettingsEntity(q.Get());
+    auto entity = q.Get();
+    SetSettingsEntity(entity);
+    delete entity;
 }
 
 void SettingsController::Update()
@@ -192,6 +207,11 @@ void SettingsController::UpdateSDate()
     QDate now = dateEditV->date();
     now = now.addDays(days);
     dateEditS->setDate(now);
+}
+
+void SettingsController::setComboBoxStyle(QComboBox *value)
+{
+    comboBoxStyle = value;
 }
 
 void SettingsController::setLabelPart2(QLabel *value)

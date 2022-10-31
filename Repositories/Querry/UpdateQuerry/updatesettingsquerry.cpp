@@ -23,7 +23,8 @@ bool UpdateSettingsQuerry::Update(SettingsEntity *entity)
                                   "dateV = :dateV_value, "
                                   "dateD = :dateD_value, "
                                   "dateS = :dateS_value, "
-                                  "DPH = :DPH_value "
+                                  "DPH = :DPH_value, "
+                                  "indexStyle = :indexStyle_value "
                                   "WHERE id = :id_value;");
 
 
@@ -35,6 +36,7 @@ bool UpdateSettingsQuerry::Update(SettingsEntity *entity)
     q.bindValue(":dateD_value",helper.toString(entity->getDateD()));
     q.bindValue(":dateS_value",helper.toString(entity->getDateS()));
     q.bindValue(":DPH_value",entity->getDPH());
+    q.bindValue(":indexStyle_value",entity->getIndexStyle());
 
     q.bindValue(":id_value",id);
     q.exec();

@@ -104,7 +104,8 @@ QString DBContext::CreateTables()
               "dateV date,"
               "dateD date,"
               "dateS date,"
-              "DPH REAL);");
+              "DPH REAL,"
+              "indexStyle INTEGER);");
 
     qDebug() << "settings" << q.lastError().text();
 

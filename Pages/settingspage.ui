@@ -525,7 +525,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Téma:</string>
+        <string>Téma aplikácie:</string>
        </property>
       </widget>
      </item>

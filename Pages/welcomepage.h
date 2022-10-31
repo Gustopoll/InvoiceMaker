@@ -30,7 +30,7 @@ private slots:
 private:
     Ui::WelcomePage *ui;
     void LoadAllPages();
-
+    QApplication* a;
     bool isLoaded = false;
     QTimer *timer;
 };

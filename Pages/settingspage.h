@@ -33,6 +33,8 @@ private slots:
     void on_comboBoxS_currentIndexChanged(int index);
     void on_comboBoxV_currentIndexChanged(int index);
 
+    void on_comboBoxStyle_currentTextChanged(const QString &arg1);
+
 private:
     Ui::SettingsPage *ui;
     QStackedWidget *stackedWidget;

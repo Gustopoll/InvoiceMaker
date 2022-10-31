@@ -36,7 +36,8 @@ public:
     double getDPH();
     void setDPH(double value);
 
-
+    int getIndexStyle();
+    void setIndexStyle(int value);
 
 private:
     int id;
@@ -49,6 +50,7 @@ private:
     QDate dateD;
     QDate dateS;
     double DPH;
+    int indexStyle;
 };
 
 #endif // SETTINGSENTITY_H

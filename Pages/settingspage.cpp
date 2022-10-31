@@ -1,6 +1,8 @@
 #include "mainpage.h"
 #include "settingspage.h"
 #include "ui_settingspage.h"
+#include <QApplication>
+#include <QStyleFactory>
 
 SettingsPage::SettingsPage(QWidget *parent,QStackedWidget *stackedWidget) :
     QWidget(parent),
@@ -25,12 +27,20 @@ SettingsPage::SettingsPage(QWidget *parent,QStackedWidget *stackedWidget) :
     settingsController->setDPH(ui->doubleSpinBoxDPH);
     settingsController->setLabelPart1(ui->labelPart1);
     settingsController->setLabelPart2(ui->labelPart2);
+    settingsController->setComboBoxStyle(ui->comboBoxStyle);
     if (settingsController->Build() == false)
         qDebug() << "error";
 
+    auto keys = QStyleFactory::keys();
+    int index = 0;
+    for (int i = 0; i < keys.size(); i++)
+    {
+        ui->comboBoxStyle->addItem(keys[i]);
+        if (keys[i] == "Fusion")
+            index = i;
+    }
+    ui->comboBoxStyle->setCurrentIndex(index);
     settingsController->SetFromDB();
-
-
 }
 
 SettingsPage::~SettingsPage()
@@ -102,4 +112,10 @@ void SettingsPage::on_comboBoxS_currentIndexChanged(int index)
 void SettingsPage::on_comboBoxV_currentIndexChanged(int index)
 {
     settingsController->comboBoxVUpdate(index);
+}
+
+
+void SettingsPage::on_comboBoxStyle_currentTextChanged(const QString &arg1)
+{
+    QApplication::setStyle(arg1);
 }
