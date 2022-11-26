@@ -26,9 +26,12 @@ private slots:
 
     void on_verticalScrollBar_sliderMoved(int position);
 
+    void on_buttonStorno_clicked();
+
 private:
     Ui::ShowInvoicePage *ui;
     QStackedWidget *stackedWidget;
+    InvoiceEntity* invoice;
 };
 
 #endif // SHOWINVOICEPAGE_H

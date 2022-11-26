@@ -29,14 +29,22 @@ bool UpdateSupplierQuerry::Update(SupplierEntity *entity)
 
     QSqlQuery q;
     q.prepare("UPDATE " + nameTable + " SET name = :name_value,"
-                                  "facturenumber = :facturenumber_value, "
+                                  "numberClassic = :numberClassic_value, "
+                                  "numberCanceled = :numberCanceled_value, "
+                                  "numberDeposit = :numberDeposit_value, "
+                                  "numberOrder = :numberOrder_value, "
+                                  "numberPriceoffer = :numberPriceoffer_value, "
                                   "ico = :ico_value,"
                                   "dic = :dic_value,"
                                   "icdph = :icdph_value "
                                   "WHERE id = :id_value;");
 
     q.bindValue(":name_value",entity->getName());
-    q.bindValue(":facturenumber_value",entity->getFactureNumber());
+    q.bindValue(":numberClassic_value",entity->getFactureNumberClassic());
+    q.bindValue(":numberCanceled_value",entity->getFactureNumberCanceled());
+    q.bindValue(":numberDeposit_value",entity->getFactureNumberDeposit());
+    q.bindValue(":numberOrder_value",entity->getFactureNumberOrder());
+    q.bindValue(":numberPriceoffer_value",entity->getFactureNumberPriceoffer());
     q.bindValue(":ico_value",entity->getIco());
     q.bindValue(":dic_value",entity->getPayer()->getDic());
     q.bindValue(":icdph_value",entity->getPayer()->getIcdph());

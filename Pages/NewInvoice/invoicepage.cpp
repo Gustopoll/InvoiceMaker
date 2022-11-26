@@ -1,9 +1,11 @@
 #include "invoicepage.h"
 #include "ui_invoicepage.h"
 #include <Extensions/customstyle.h>
+#include <Extensions/typeinvoicemapper.h>
 #include <QResizeEvent>
 #include <QApplication>
 #include <QDebug>
+#include <QFileDialog>
 #include <Repositories/Querry/GetQuerry/getcustomerquerry.h>
 #include <Repositories/Querry/GetQuerry/getsupplierquerry.h>
 #include <Controller/customercontroller.h>
@@ -11,6 +13,8 @@
 #include <Controller/suppliercontroller.h>
 #include <Repositories/Querry/AddQuerry/addinvoicequerry.h>
 #include <Pages/mainpage.h>
+#include <Repositories/Querry/UpdateQuerry/updatesupplierquerry.h>
+#include <PDF/Creator/invoicecreator.h>
 
 #define PAGE1 0
 #define PAGE2 1
@@ -66,6 +70,16 @@ InvoicePage::InvoicePage(QWidget *parent, QStackedWidget *stackedWidget) :
     itemInvoiceController->AddLabelTotalPrice(ui->labelTotalPrice);
     itemInvoiceController->AddLabelSumTotalPrice(ui->labelSumTotalPrice);
     itemInvoiceController->AddLineEditDescription(ui->lineEditDescription);
+
+    ui->comboBoxType->clear();
+    int i = 0;
+    auto name = TypeInvoiceMapper::toString((InvoiceType)i);
+    while (name != "")
+    {
+        ui->comboBoxType->addItem(name);
+        i++;
+        name = TypeInvoiceMapper::toString((InvoiceType)i);
+    }
     Update();
 }
 
@@ -80,18 +94,82 @@ InvoicePage::~InvoicePage()
 
 void InvoicePage::Update()
 {
+    bool visible = true;
+
+    ui->dateEditD->setVisible(visible);
+    ui->labelDodania->setVisible(visible);
+    ui->comboBoxDday->setVisible(visible);
+    ui->dateEditS->setVisible(visible);
+    ui->labelSplatnost->setVisible(visible);
+    ui->comboBoxS->setVisible(visible);
+    ui->comboBoxPayment->setVisible(visible);
+
+    ui->labelNumberFactureFor->setVisible(false);
+    ui->lineEditNumberFactureFor->setVisible(false);
+    ui->labelNumberFacture->setText("Číslo faktúry");
+    ui->labelVystavenia->setText("Dátum vystavenia:");
+    ui->buttonNext3->setIcon(QIcon());
+    ui->buttonNext3->setText("Ďalej");
+    ui->progressBar_2->setValue(50);
+
+    CustomStyle cs;
+    ui->buttonNext3->setStyleSheet(cs.ClassicButtonStyle());
+
     ui->stackedWidget->setCurrentIndex(0);
     itemInvoiceController->Clear(ui->treeWidget);
-    ui->doubleSpinBoxDPH_item->setValue(ui->doubleSpinBoxDPH->value());
-    ui->lineEditDescription->setText("Na základe objednávok vám fakturujeme cenu práce za mesiac " +
-                                     QString::number(ui->dateEditV->date().month()) + "/" + QString::number(ui->dateEditV->date().year()));
+
     supplierController->Update();
     customerController->Update();
     supplierController->SetSuppliers("Vyber dodavateľa",ui->comboBoxSupplier);
     customerController->SetCustomers("Vyber odberateľa",ui->comboBoxCustomer);
     ui->comboBoxCustomer->setCurrentIndex(0);
     ui->comboBoxSupplier->setCurrentIndex(0);
+
+    ui->doubleSpinBoxDPH_item->setValue(ui->doubleSpinBoxDPH->value());
+    ui->lineEditDescription->setText("Na základe objednávok vám fakturujeme cenu práce za mesiac " +
+                                     QString::number(ui->dateEditV->date().month()) + "/" + QString::number(ui->dateEditV->date().year()));
+
     settingsController->SetFromDB();
+}
+
+void InvoicePage::SetDobropis(InvoiceEntity *entity)
+{
+    SetDobropis();
+    ui->comboBoxType->setCurrentIndex((int)InvoiceType::Dobropis);
+    ClearCustomer();
+    ClearSupplier();
+    auto factureNumber = entity->getFactureNumberByInvoiceType();
+    entity->getSupplierSaved()->setFactureNumberClassic(factureNumber);
+    entity->getSupplierSaved()->setFactureNumberCanceled(1); //default value
+    if (entity->getIdSupplier() != -1)
+    {
+        GetSupplierQuerry querry;
+        auto e = querry.GetOneById(entity->getIdSupplier());
+        entity->getSupplierSaved()->setFactureNumberCanceled(e->getFactureNumberCanceled());
+        delete e;
+    }
+
+    SetCustomerEntity(entity->getCustomerSaved());
+    SetSupplierEntity(entity->getSupplierSaved(),InvoiceType::Dobropis);
+
+    //vystavenia datum
+    ui->comboBoxV->setCurrentIndex(1); //custom time
+    ui->dateEditV->setDate(entity->getDateV());
+    //dodania datum
+    ui->comboBoxDday->setCurrentIndex(4); //custom time
+    ui->dateEditD->setDate(entity->getDateD());
+
+    //items
+    auto items = entity->getItems();
+    for (int i = 0; i < items.size(); i++)
+    {
+        ui->spinBoxCount->setValue(items[i]->getCount());
+        ui->lineEditDescription->setText(items[i]->getDescription());
+        ui->doubleSpinBoxDPH_item->setValue(items[i]->getDPH());
+        ui->doubleSpinBoxPrice->setValue(-1*std::abs(items[i]->getPrice()));
+        //itemInvoiceController->CreateItem(ui->treeWidget);
+        on_buttonAddItem_clicked();
+    }
 }
 
 void InvoicePage::resizeEvent(QResizeEvent *event)
@@ -112,6 +190,7 @@ void InvoicePage::on_buttonNext2_clicked()
 
 void InvoicePage::on_buttonBackToMenu_clicked()
 {
+    ui->comboBoxType->setCurrentIndex(0);
     stackedWidget->setCurrentIndex((int)PageNumber::MAIN_MENU);
 }
 
@@ -132,68 +211,26 @@ void InvoicePage::on_buttonBackTo2_clicked()
 
 void InvoicePage::on_buttonSave_clicked()
 {
-    SupplierEntity* supplierEntity = new SupplierEntity();
-
-    supplierEntity->setIco(ui->lineEditICO_D->text());
-    supplierEntity->setName(ui->lineEditNameD->text());
-    supplierEntity->setFactureNumber(ui->lineEditNumberFacture->text().toInt());
-    supplierEntity->getPayer()->setDic(ui->lineEditDIC_D->text());
-    supplierEntity->getPayer()->setIcdph(ui->lineEditICDPH_D->text());
-    supplierEntity->getAdress()->setPsc(ui->lineEditPSC_D->text());
-    supplierEntity->getAdress()->setCity(ui->lineEditCityD->text());
-    supplierEntity->getAdress()->setState(ui->lineEditStateD->text());
-    supplierEntity->getAdress()->setStreet(ui->lineEditAdressD->text());
-    supplierEntity->getAdress()->setStreetNumber("");
-
-    supplierEntity->getBankinfo()->setVS(ui->lineEditVS->text());
-    supplierEntity->getBankinfo()->setIBAN(ui->lineEditIBAN->text());
-    supplierEntity->getBankinfo()->setSWIFT(ui->lineEditSWIFT->text());
-
-    CustomerEntity* customerEntity = new CustomerEntity();
-
-    customerEntity->setIco(ui->lineEditICO_O->text());
-    customerEntity->setName(ui->lineEditNameO->text());
-    customerEntity->getPayer()->setDic(ui->lineEditDIC_O->text());
-    customerEntity->getPayer()->setIcdph(ui->lineEditICDPH_O->text());
-    customerEntity->getAdress()->setPsc(ui->lineEditPSC_O->text());
-    customerEntity->getAdress()->setCity(ui->lineEditCityO->text());
-    customerEntity->getAdress()->setState(ui->lineEditStateO->text());
-    customerEntity->getAdress()->setStreet(ui->lineEditAdressO->text());
-    customerEntity->getAdress()->setStreetNumber("");
-
-    InvoiceController* invoiceController = new InvoiceController();
-    invoiceController->setDateEditD(ui->dateEditD);
-    invoiceController->setDateEditV(ui->dateEditV);
-    invoiceController->setDateEditS(ui->dateEditS);
-
-
-    auto customer = customerController->GetEntityByIndex(ui->comboBoxCustomer->currentIndex()-1);
-    if (customer != nullptr)
-        invoiceController->setIdCustomer(customer->getId());
-
-    auto supplier = supplierController->GetEntityByIndex(ui->comboBoxSupplier->currentIndex()-1);
-    if (supplier != nullptr)
-        invoiceController->setIdSupplier(supplier->getId());
-
-    invoiceController->setComboBoxType(ui->comboBoxType);
-    invoiceController->setComboBoxPayment(ui->comboBoxPayment);
-    invoiceController->setCustomerSavedEntity(customerEntity);
-    invoiceController->setSupplierSavedEntity(supplierEntity);
-
-    auto items = itemInvoiceController->GetAllEntities(ui->treeWidget);
-    for (int i = 0; i < items.size(); i++)
-        invoiceController->addItem(items[i]);
-
-    auto invoice = invoiceController->Create();
+    auto invoice = CreateInvoiceEntity();
 
     AddInvoiceQuerry q;
     q.Add(invoice);
     qDebug() << q.GetLastError();
 
-    delete customerEntity;
-    delete supplierEntity;
+    auto supplier = supplierController->GetEntityByIndex(ui->comboBoxSupplier->currentIndex()-1);
+    if (supplier != nullptr) //supplier must exists
+    {
+        auto numberFacture = invoice->getFactureNumberByInvoiceType();
+        if (ui->lineEditNumberFacture->text().toInt() == numberFacture) //user do not change facture number
+        {
+            numberFacture++;
+            supplier->setFactureNumberByInvoiceType((InvoiceType)ui->comboBoxType->currentIndex(),numberFacture);
+            UpdateSupplierQuerry updateSupplier;
+            updateSupplier.Update(supplier);
+        }
+    }
+
     delete invoice;
-    delete invoiceController;
 
     auto w = (MainPage*)stackedWidget->widget((int)PageNumber::MAIN_MENU);
     w->Update();
@@ -239,6 +276,8 @@ void InvoicePage::on_checkBoxDPHPayer_stateChanged(int arg1)
 void InvoicePage::on_comboBoxV_currentIndexChanged(int index)
 {
     settingsController->comboBoxVUpdate(index);
+    ui->lineEditDescription->setText("Na základe objednávok vám fakturujeme cenu práce za mesiac " +
+                                     QString::number(ui->dateEditV->date().month()) + "/" + QString::number(ui->dateEditV->date().year()));
 }
 
 void InvoicePage::on_comboBoxDday_currentIndexChanged(int index)
@@ -271,40 +310,11 @@ void InvoicePage::on_comboBoxSupplier_currentIndexChanged(int index)
     if (entity == nullptr)
     {
         ui->comboBoxPayment->setCurrentIndex(0);
-        ui->checkBoxDPHPayer->setCheckState(Qt::CheckState::Checked);
-        ui->lineEditIBAN->setText("");
-        ui->lineEditSWIFT->setText("");
-        ui->lineEditNameD->setText("");
-        ui->lineEditICO_D->setText("");
-        ui->lineEditDIC_D->setText("");
-        ui->lineEditICDPH_D->setText("");
-        ui->lineEditStateD->setText("");
-        ui->lineEditCityD->setText("");
-        ui->lineEditPSC_D->setText("");
-        ui->lineEditAdressD->setText("");
-        ui->lineEditNumberFacture->setText("");
+        ClearSupplier();
         return;
     }
-    if (entity->getBankinfo()->isValid() == true)
-        ui->comboBoxPayment->setCurrentIndex(1);// bankový prevod
-    else
-        ui->comboBoxPayment->setCurrentIndex(0); // hotovsť
 
-    if (entity->isPayer() == true)
-        ui->checkBoxDPHPayer->setCheckState(Qt::CheckState::Checked);
-    else
-        ui->checkBoxDPHPayer->setCheckState(Qt::CheckState::Unchecked);
-    ui->lineEditIBAN->setText(entity->getBankinfo()->getIBAN());
-    ui->lineEditSWIFT->setText(entity->getBankinfo()->getSWIFT());
-    ui->lineEditNameD->setText(entity->getName());
-    ui->lineEditICO_D->setText(entity->getIco());
-    ui->lineEditDIC_D->setText(entity->getPayer()->getDic());
-    ui->lineEditICDPH_D->setText(entity->getPayer()->getIcdph());
-    ui->lineEditCityD->setText(entity->getAdress()->getCity());
-    ui->lineEditStateD->setText(entity->getAdress()->getState());
-    ui->lineEditPSC_D->setText(entity->getAdress()->getPsc());
-    ui->lineEditAdressD->setText(entity->getAdress()->getStreetWithNumber());
-    ui->lineEditNumberFacture->setText(QString::number(entity->getFactureNumber()));
+    SetSupplierEntity(entity,(InvoiceType)ui->comboBoxType->currentIndex());
 }
 
 void InvoicePage::on_comboBoxCustomer_currentIndexChanged(int index)
@@ -313,24 +323,11 @@ void InvoicePage::on_comboBoxCustomer_currentIndexChanged(int index)
     auto entity = customerController->GetEntityByIndex(indexCustomer);
     if (entity == nullptr)
     {
-        ui->lineEditNameO->setText("");
-        ui->lineEditICO_O->setText("");
-        ui->lineEditDIC_O->setText("");
-        ui->lineEditICDPH_O->setText("");
-        ui->lineEditStateO->setText("");
-        ui->lineEditCityO->setText("");
-        ui->lineEditPSC_O->setText("");
-        ui->lineEditAdressO->setText("");
+        ClearCustomer();
         return;
     }
-    ui->lineEditNameO->setText(entity->getName());
-    ui->lineEditICO_O->setText(entity->getIco());
-    ui->lineEditDIC_O->setText(entity->getPayer()->getDic());
-    ui->lineEditICDPH_O->setText(entity->getPayer()->getIcdph());
-    ui->lineEditCityO->setText(entity->getAdress()->getCity());
-    ui->lineEditStateO->setText(entity->getAdress()->getState());
-    ui->lineEditPSC_O->setText(entity->getAdress()->getPsc());
-    ui->lineEditAdressO->setText(entity->getAdress()->getStreetWithNumber());
+
+    SetCustomerEntity(entity);
 }
 
 void InvoicePage::on_buttonAddItem_clicked()
@@ -374,18 +371,250 @@ void InvoicePage::on_doubleSpinBoxDPH_valueChanged(double arg1)
     ui->doubleSpinBoxDPH_item->setValue(arg1);
 }
 
+void InvoicePage::SetSupplierEntity(SupplierEntity *entity, InvoiceType type)
+{
+    if (entity->getBankinfo()->isValid() == true)
+        ui->comboBoxPayment->setCurrentIndex(1);// bankový prevod
+    else
+        ui->comboBoxPayment->setCurrentIndex(0); // hotovsť
+
+    if (entity->isPayer() == true)
+        ui->checkBoxDPHPayer->setCheckState(Qt::CheckState::Checked);
+    else
+        ui->checkBoxDPHPayer->setCheckState(Qt::CheckState::Unchecked);
+    ui->lineEditIBAN->setText(entity->getBankinfo()->getIBAN());
+    ui->lineEditSWIFT->setText(entity->getBankinfo()->getSWIFT());
+    ui->lineEditNameD->setText(entity->getName());
+    ui->lineEditICO_D->setText(entity->getIco());
+    ui->lineEditDIC_D->setText(entity->getPayer()->getDic());
+    ui->lineEditICDPH_D->setText(entity->getPayer()->getIcdph());
+    ui->lineEditCityD->setText(entity->getAdress()->getCity());
+    ui->lineEditStateD->setText(entity->getAdress()->getState());
+    ui->lineEditPSC_D->setText(entity->getAdress()->getPsc());
+    ui->lineEditAdressD->setText(entity->getAdress()->getStreetWithNumber());
+
+    ui->lineEditNumberFacture->setText(QString::number(entity->getFactureNumberByInvoiceType(type)));
+    ui->lineEditNumberFactureFor->setText(QString::number(entity->getFactureNumberClassic()));
+    //ui->lineEditNumberFacture->setText(QString::number(entity->getFactureNumberByInvoiceType(type)));
+    //ui->lineEditNumberFactureFor->setText(QString::number(entity->getFactureNumberClassic()));
+}
+
+void InvoicePage::SetCustomerEntity(CustomerEntity *entity)
+{
+    ui->lineEditNameO->setText(entity->getName());
+    ui->lineEditICO_O->setText(entity->getIco());
+    ui->lineEditDIC_O->setText(entity->getPayer()->getDic());
+    ui->lineEditICDPH_O->setText(entity->getPayer()->getIcdph());
+    ui->lineEditCityO->setText(entity->getAdress()->getCity());
+    ui->lineEditStateO->setText(entity->getAdress()->getState());
+    ui->lineEditPSC_O->setText(entity->getAdress()->getPsc());
+    ui->lineEditAdressO->setText(entity->getAdress()->getStreetWithNumber());
+}
+
+void InvoicePage::ClearSupplier()
+{
+    ui->checkBoxDPHPayer->setCheckState(Qt::CheckState::Checked);
+    ui->lineEditIBAN->setText("");
+    ui->lineEditSWIFT->setText("");
+    ui->lineEditNameD->setText("");
+    ui->lineEditICO_D->setText("");
+    ui->lineEditDIC_D->setText("");
+    ui->lineEditICDPH_D->setText("");
+    ui->lineEditStateD->setText("");
+    ui->lineEditCityD->setText("");
+    ui->lineEditPSC_D->setText("");
+    ui->lineEditAdressD->setText("");
+    ui->lineEditNumberFacture->setText("");
+}
+
+void InvoicePage::ClearCustomer()
+{
+    ui->lineEditNameO->setText("");
+    ui->lineEditICO_O->setText("");
+    ui->lineEditDIC_O->setText("");
+    ui->lineEditICDPH_O->setText("");
+    ui->lineEditStateO->setText("");
+    ui->lineEditCityO->setText("");
+    ui->lineEditPSC_O->setText("");
+    ui->lineEditAdressO->setText("");
+}
+
 
 void InvoicePage::on_buttonX1_clicked()
 {
+    ui->comboBoxType->setCurrentIndex(0);
     stackedWidget->setCurrentIndex((int)PageNumber::MAIN_MENU);
 }
 
 void InvoicePage::on_buttonX2_clicked()
 {
+    ui->comboBoxType->setCurrentIndex(0);
     stackedWidget->setCurrentIndex((int)PageNumber::MAIN_MENU);
 }
 
 void InvoicePage::on_buttonX3_clicked()
 {
+    ui->comboBoxType->setCurrentIndex(0);
     stackedWidget->setCurrentIndex((int)PageNumber::MAIN_MENU);
+}
+
+void InvoicePage::SetZalohovaFaktura()
+{
+    ui->dateEditD->setVisible(false);
+    ui->labelDodania->setVisible(false);
+    ui->comboBoxDday->setVisible(false);
+    ui->comboBoxDmonth->setVisible(false);
+    ui->labelPart1->setVisible(false);
+    ui->labelPart2->setVisible(false);
+    ui->lineEditDescription->setText("Záloha za služby " + QString::number(ui->dateEditV->date().month()) + "/" + QString::number(ui->dateEditV->date().year()));
+}
+
+void InvoicePage::SetDobropis()
+{
+    bool value = false;
+    ui->dateEditS->setVisible(value);
+    ui->labelSplatnost->setVisible(value);
+    ui->comboBoxS->setVisible(value);
+    ui->labelNumberFactureFor->setVisible(true);
+    ui->lineEditNumberFactureFor->setVisible(true);
+    ui->lineEditDescription->setText("");
+    ui->labelNumberFacture->setText("Číslo dobropisu");
+}
+
+void InvoicePage::SetObjednavka()
+{
+    bool value = false;
+    ui->comboBoxPayment->setCurrentIndex(0);
+    ui->comboBoxPayment->setVisible(value);
+    ui->labelPayment->setVisible(false);
+
+    ui->dateEditD->setVisible(false);
+    ui->labelDodania->setVisible(false);
+    ui->comboBoxDday->setVisible(false);
+    ui->comboBoxDmonth->setVisible(false);
+    ui->labelPart1->setVisible(false);
+    ui->labelPart2->setVisible(false);
+
+    ui->dateEditS->setVisible(value);
+    ui->labelSplatnost->setVisible(value);
+    ui->comboBoxS->setVisible(value);
+
+    ui->labelNumberFacture->setText("Číslo objednávky");
+    ui->labelVystavenia->setText("Dátum vytvorenia:");
+}
+
+void InvoicePage::SetCenovaPonuka()
+{
+    bool value = false;
+    ui->comboBoxPayment->setCurrentIndex(0);
+    ui->comboBoxPayment->setVisible(value);
+    ui->labelPayment->setVisible(false);
+
+    ui->labelPayment->setVisible(false);
+    ui->dateEditD->setVisible(false);
+    ui->labelDodania->setVisible(false);
+    ui->comboBoxDday->setVisible(false);
+    ui->comboBoxDmonth->setVisible(false);
+    ui->labelPart1->setVisible(false);
+    ui->labelPart2->setVisible(false);
+
+    ui->labelNumberFacture->setText("Číslo ponuky");
+    ui->labelVystavenia->setText("Dátum vytvorenia:");
+}
+
+void InvoicePage::on_comboBoxType_currentIndexChanged(int index)
+{
+    Update();
+    if ((InvoiceType)index == InvoiceType::Zalohova_faktura)
+        SetZalohovaFaktura();
+    if ((InvoiceType)index == InvoiceType::Dobropis)
+        SetDobropis();
+    if ((InvoiceType)index == InvoiceType::Objednavka)
+        SetObjednavka();
+    if ((InvoiceType)index == InvoiceType::Cenova_ponuka)
+        SetCenovaPonuka();
+}
+
+void InvoicePage::on_buttonSavePDF_clicked()
+{
+    //auto w = (MainPage*)stackedWidget->widget((int)PageNumber::MAIN_MENU);
+    auto invoice = CreateInvoiceEntity();
+    SaveInvoice(invoice);
+    //qDebug() << invoice->getSupplierSaved()->getName();
+    //w->SaveInvoice(invoice);
+    delete invoice;
+}
+
+InvoiceEntity *InvoicePage::CreateInvoiceEntity()
+{
+    SupplierEntity* supplierEntity = new SupplierEntity();
+
+    supplierEntity->setIco(ui->lineEditICO_D->text());
+    supplierEntity->setName(ui->lineEditNameD->text());
+    supplierEntity->getPayer()->setDic(ui->lineEditDIC_D->text());
+    supplierEntity->getPayer()->setIcdph(ui->lineEditICDPH_D->text());
+    supplierEntity->getAdress()->setPsc(ui->lineEditPSC_D->text());
+    supplierEntity->getAdress()->setCity(ui->lineEditCityD->text());
+    supplierEntity->getAdress()->setState(ui->lineEditStateD->text());
+    supplierEntity->getAdress()->setStreet(ui->lineEditAdressD->text());
+    supplierEntity->getAdress()->setStreetNumber("");
+    supplierEntity->setFactureNumberClassic(ui->lineEditNumberFactureFor->text().toInt());
+    supplierEntity->setFactureNumberByInvoiceType((InvoiceType)ui->comboBoxType->currentIndex(),ui->lineEditNumberFacture->text().toInt());
+
+    supplierEntity->getBankinfo()->setVS(ui->lineEditVS->text());
+    supplierEntity->getBankinfo()->setIBAN(ui->lineEditIBAN->text());
+    supplierEntity->getBankinfo()->setSWIFT(ui->lineEditSWIFT->text());
+
+    CustomerEntity* customerEntity = new CustomerEntity();
+
+    customerEntity->setIco(ui->lineEditICO_O->text());
+    customerEntity->setName(ui->lineEditNameO->text());
+    customerEntity->getPayer()->setDic(ui->lineEditDIC_O->text());
+    customerEntity->getPayer()->setIcdph(ui->lineEditICDPH_O->text());
+    customerEntity->getAdress()->setPsc(ui->lineEditPSC_O->text());
+    customerEntity->getAdress()->setCity(ui->lineEditCityO->text());
+    customerEntity->getAdress()->setState(ui->lineEditStateO->text());
+    customerEntity->getAdress()->setStreet(ui->lineEditAdressO->text());
+    customerEntity->getAdress()->setStreetNumber("");
+
+    InvoiceController* invoiceController = new InvoiceController();
+    invoiceController->setDateEditD(ui->dateEditD);
+    invoiceController->setDateEditV(ui->dateEditV);
+    invoiceController->setDateEditS(ui->dateEditS);
+
+    auto customer = customerController->GetEntityByIndex(ui->comboBoxCustomer->currentIndex()-1);
+    if (customer != nullptr)
+        invoiceController->setIdCustomer(customer->getId());
+
+    auto supplier = supplierController->GetEntityByIndex(ui->comboBoxSupplier->currentIndex()-1);
+    if (supplier != nullptr)
+        invoiceController->setIdSupplier(supplier->getId());
+
+    invoiceController->setComboBoxType(ui->comboBoxType);
+    invoiceController->setComboBoxPayment(ui->comboBoxPayment);
+    invoiceController->setCustomerSavedEntity(customerEntity);
+    invoiceController->setSupplierSavedEntity(supplierEntity);
+
+    auto items = itemInvoiceController->GetAllEntities(ui->treeWidget);
+    for (int i = 0; i < items.size(); i++)
+        invoiceController->addItem(items[i]);
+
+    return invoiceController->Create();
+}
+
+void InvoicePage::SaveInvoice(InvoiceEntity *entity)
+{
+    std::string nameForFile = entity->getSupplierSaved()->getName().toStdString() + "_" + QString::number(entity->getFactureNumberByInvoiceType()).toStdString()  + ".pdf";
+    QString dirpath;
+    dirpath = QFileDialog::getSaveFileName(this,tr("Ukldanie"),tr(nameForFile.c_str()),tr("PDF(*.pdf)")),
+                  QCoreApplication::applicationDirPath();
+
+    if (dirpath.isEmpty() == true)
+        return;
+    qDebug() << dirpath;
+
+    InvoiceCreator creator;
+    auto invoiceGenerator = creator.Create(dirpath,entity->getInvoiceType());
+    invoiceGenerator->Generate(entity);
+    delete invoiceGenerator;
 }

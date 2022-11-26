@@ -16,6 +16,7 @@ public:
     void Update();
 
     SupplierEntity* GetEntityByIndex(int index);
+    SupplierEntity* GetEntityById(int id);
 
 private:
     QList<SupplierEntity*> listSuppliers;

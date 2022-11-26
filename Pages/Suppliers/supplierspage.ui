@@ -80,7 +80,7 @@
         <bool>false</bool>
        </property>
        <property name="selectionMode">
-        <enum>QAbstractItemView::NoSelection</enum>
+        <enum>QAbstractItemView::SingleSelection</enum>
        </property>
        <property name="selectionBehavior">
         <enum>QAbstractItemView::SelectRows</enum>
@@ -88,6 +88,11 @@
        <column>
         <property name="text">
          <string>ID</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Č.</string>
         </property>
        </column>
        <column>
@@ -108,11 +113,6 @@
        <column>
         <property name="text">
          <string>Platca DPH</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Číslo f.</string>
         </property>
        </column>
        <column>

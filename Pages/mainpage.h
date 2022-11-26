@@ -24,6 +24,7 @@ public:
 
     void Start();
     void Update();
+    void SaveInvoice(InvoiceEntity* entity);
 
 private slots:
     void on_buttonNewInvoice_clicked();
@@ -34,6 +35,8 @@ private slots:
     void on_comboBoxMonth_currentIndexChanged(int index);
     void on_comboBoxSupplier_activated(int index);
 
+    void on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
+
 private:
     Ui::MainWindow *ui;
     QStackedWidget *stackedWidget;
@@ -41,7 +44,6 @@ private:
     TemporaryMessageController *temporaryMessageController;
     void resizeEvent(QResizeEvent *event);
     void AddInvoiceEntity(InvoiceEntity* entity, int number);
-    void SaveInvoice(InvoiceEntity* entity, QString pathfile); 
 
 };
 #endif // MAINWINDOW_H

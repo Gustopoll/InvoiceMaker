@@ -19,6 +19,82 @@
      <property name="spacing">
       <number>6</number>
      </property>
+     <item row="11" column="1">
+      <widget class="QLineEdit" name="lineEditNumberClassic">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="labelPSC_D">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>PSČ</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="labelDIC_D">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 127);</string>
+       </property>
+       <property name="text">
+        <string>DIČ</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="lineEditNameD">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Dominik Švač</string>
+       </property>
+      </widget>
+     </item>
+     <item row="16" column="1">
+      <widget class="QLineEdit" name="lineEditIBAN">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="0">
       <widget class="QCheckBox" name="checkBoxDPHPayer">
        <property name="enabled">
@@ -42,22 +118,20 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="labelStreetD">
+     <item row="12" column="0">
+      <widget class="QLabel" name="labelNumberDeposit">
        <property name="font">
         <font>
          <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
         </font>
        </property>
        <property name="text">
-        <string>Ulica</string>
+        <string>Číslo zálohovej faktúry</string>
        </property>
       </widget>
      </item>
-     <item row="10" column="1">
-      <widget class="QLineEdit" name="lineEditStateD">
+     <item row="6" column="1">
+      <widget class="QLineEdit" name="lineEditStreetD">
        <property name="font">
         <font>
          <pointsize>12</pointsize>
@@ -67,28 +141,43 @@
        </property>
       </widget>
      </item>
-     <item row="9" column="0">
-      <widget class="QLabel" name="labelCityD">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Mesto</string>
-       </property>
-      </widget>
-     </item>
-     <item row="13" column="1">
-      <widget class="QLineEdit" name="lineEditSWIFT">
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="lineEditICDPH_D">
        <property name="font">
         <font>
          <pointsize>12</pointsize>
          <weight>50</weight>
          <bold>false</bold>
         </font>
+       </property>
+      </widget>
+     </item>
+     <item row="17" column="0">
+      <widget class="QLabel" name="labelSWIFT">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>SWIFT</string>
+       </property>
+      </widget>
+     </item>
+     <item row="14" column="0">
+      <widget class="QLabel" name="labelNumberPriceoffer">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Číslo cenovej ponuky</string>
        </property>
       </widget>
      </item>
@@ -106,182 +195,15 @@
        </property>
       </widget>
      </item>
-     <item row="11" column="0">
-      <widget class="QLabel" name="labelNumberFacture">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Číslo faktúry</string>
-       </property>
-      </widget>
-     </item>
-     <item row="12" column="0">
-      <widget class="QLabel" name="labelIBAN">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="text">
-        <string>IBAN</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="0">
-      <widget class="QLabel" name="labelPSC_D">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>PSČ</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="1">
-      <widget class="QLineEdit" name="lineEditStreetD">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLineEdit" name="lineEditDIC_D">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="1">
-      <widget class="QLineEdit" name="lineEditPSC_D">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="1">
-      <widget class="QLineEdit" name="lineEditCityD">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="QLineEdit" name="lineEditICO_D">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="labelDIC_D">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 127);</string>
-       </property>
-       <property name="text">
-        <string>DIČ</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="0">
-      <widget class="QLabel" name="labelStateD">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Štát</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="labelNameD">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Dodávateľ</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QLineEdit" name="lineEditICDPH_D">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-      </widget>
-     </item>
      <item row="13" column="0">
-      <widget class="QLabel" name="labelSWIFT">
+      <widget class="QLabel" name="labelNumberCanceled">
        <property name="font">
         <font>
          <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
         </font>
        </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
        <property name="text">
-        <string>SWIFT</string>
+        <string>Číslo dobropisu</string>
        </property>
       </widget>
      </item>
@@ -308,17 +230,6 @@
        </property>
       </widget>
      </item>
-     <item row="12" column="1">
-      <widget class="QLineEdit" name="lineEditIBAN">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-      </widget>
-     </item>
      <item row="4" column="0">
       <widget class="QLabel" name="labelICDPH_D">
        <property name="font">
@@ -336,6 +247,165 @@
        </property>
       </widget>
      </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="lineEditDIC_D">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0">
+      <widget class="QLabel" name="labelNumberClassic">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Číslo faktúry</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="1">
+      <widget class="QLineEdit" name="lineEditCityD">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0">
+      <widget class="QLabel" name="labelStateD">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Štát</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="labelStreetD">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Ulica</string>
+       </property>
+      </widget>
+     </item>
+     <item row="17" column="1">
+      <widget class="QLineEdit" name="lineEditSWIFT">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="lineEditICO_D">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="0">
+      <widget class="QLabel" name="labelCityD">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Mesto</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelNameD">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Dodávateľ</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="QLineEdit" name="lineEditPSC_D">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="1">
+      <widget class="QLineEdit" name="lineEditStateD">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="16" column="0">
+      <widget class="QLabel" name="labelIBAN">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>IBAN</string>
+       </property>
+      </widget>
+     </item>
      <item row="7" column="1">
       <widget class="QLineEdit" name="lineEditStreetNumberD">
        <property name="font">
@@ -345,37 +415,51 @@
        </property>
       </widget>
      </item>
-     <item row="11" column="1">
-      <widget class="QLineEdit" name="lineEditNumberFacture">
+     <item row="15" column="0">
+      <widget class="QLabel" name="labelNumberOrder">
        <property name="font">
         <font>
          <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
         </font>
        </property>
        <property name="text">
-        <string>2</string>
+        <string>Číslo objednávky</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEditNameD">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
+     <item row="12" column="1">
+      <widget class="QLineEdit" name="lineEditNumberDeposit">
        <property name="font">
         <font>
          <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
         </font>
        </property>
-       <property name="text">
-        <string>Dominik Švač</string>
+      </widget>
+     </item>
+     <item row="13" column="1">
+      <widget class="QLineEdit" name="lineEditNumberCanceled">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="14" column="1">
+      <widget class="QLineEdit" name="lineEditPriceoffer">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="15" column="1">
+      <widget class="QLineEdit" name="lineEditNumberOrder">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
        </property>
       </widget>
      </item>
@@ -483,7 +567,7 @@
   <tabstop>lineEditPSC_D</tabstop>
   <tabstop>lineEditCityD</tabstop>
   <tabstop>lineEditStateD</tabstop>
-  <tabstop>lineEditNumberFacture</tabstop>
+  <tabstop>lineEditNumberClassic</tabstop>
   <tabstop>lineEditIBAN</tabstop>
   <tabstop>lineEditSWIFT</tabstop>
   <tabstop>buttonSave</tabstop>

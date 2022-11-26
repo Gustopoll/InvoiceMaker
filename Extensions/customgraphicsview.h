@@ -6,7 +6,7 @@
 #include <QPaintEvent>
 #include <QGraphicsView>
 
-#include "../pdfinvoicegenerator.h"
+#include <PDF/classicinvoice.h>
 
 class CustomGraphicsView : public QWidget
 {

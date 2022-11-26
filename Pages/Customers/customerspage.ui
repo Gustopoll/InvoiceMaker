@@ -77,11 +77,16 @@
         <enum>Qt::NoFocus</enum>
        </property>
        <property name="selectionMode">
-        <enum>QAbstractItemView::NoSelection</enum>
+        <enum>QAbstractItemView::SingleSelection</enum>
        </property>
        <column>
         <property name="text">
          <string>ID</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Č.</string>
         </property>
        </column>
        <column>
@@ -101,7 +106,7 @@
        </column>
        <column>
         <property name="text">
-         <string>Delete</string>
+         <string/>
         </property>
        </column>
       </widget>

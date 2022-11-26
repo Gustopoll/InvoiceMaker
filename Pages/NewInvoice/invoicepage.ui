@@ -326,7 +326,7 @@
             </widget>
            </item>
            <item row="0" column="0">
-            <widget class="QLabel" name="label_11">
+            <widget class="QLabel" name="labelDodania">
              <property name="font">
               <font>
                <pointsize>12</pointsize>
@@ -481,7 +481,7 @@
          <item row="6" column="0" colspan="4">
           <layout class="QGridLayout" name="gridSplatnost">
            <item row="0" column="0">
-            <widget class="QLabel" name="label_13">
+            <widget class="QLabel" name="labelSplatnost">
              <property name="font">
               <font>
                <pointsize>12</pointsize>
@@ -643,7 +643,7 @@
           </widget>
          </item>
          <item row="10" column="0">
-          <widget class="QLabel" name="label_17">
+          <widget class="QLabel" name="labelPayment">
            <property name="font">
             <font>
              <pointsize>12</pointsize>
@@ -712,7 +712,7 @@
             </widget>
            </item>
            <item row="1" column="0" colspan="2">
-            <widget class="QLabel" name="label_10">
+            <widget class="QLabel" name="labelVystavenia">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                <horstretch>0</horstretch>
@@ -811,6 +811,30 @@ QProgressBar::chunk
      </widget>
      <widget class="QWidget" name="page2">
       <layout class="QGridLayout" name="gridLayout_5">
+       <item row="1" column="2">
+        <widget class="QPushButton" name="buttonBackTo1">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Späť</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QPushButton" name="buttonNext3">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Ďalej</string>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="5">
         <spacer name="horizontalSpacer_17">
          <property name="orientation">
@@ -824,166 +848,22 @@ QProgressBar::chunk
          </property>
         </spacer>
        </item>
+       <item row="0" column="0">
+        <spacer name="horizontalSpacer_18">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
        <item row="0" column="1" colspan="4">
         <layout class="QGridLayout" name="gridLayout_4">
-         <item row="7" column="1">
-          <widget class="QLineEdit" name="lineEditStateD">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="placeholderText">
-            <string>Štát</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0">
-          <widget class="QLabel" name="labelCityD">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Mesto dodávateľa</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QLabel" name="labelPSC_D">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>PSČ</string>
-           </property>
-          </widget>
-         </item>
-         <item row="12" column="2">
-          <widget class="QLabel" name="labelDIC_O">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>DIČ</string>
-           </property>
-          </widget>
-         </item>
-         <item row="13" column="1">
-          <widget class="QLineEdit" name="lineEditICDPH_D">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="placeholderText">
-            <string>IČ DPH</string>
-           </property>
-          </widget>
-         </item>
-         <item row="9" column="0">
-          <widget class="QCheckBox" name="checkBoxDPHPayer">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Platca DPH</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-           <property name="tristate">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="2">
-          <widget class="QLabel" name="labelCityO">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Mesto odberateľa</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <widget class="QLabel" name="label_3">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>60</width>
-             <height>70</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">border-image: url(:/icon/Data/customer.png);</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="labelAdressD">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Adresa dodávateľa</string>
-           </property>
-          </widget>
-         </item>
-         <item row="13" column="2">
-          <widget class="QLabel" name="labelICDPH_O">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>IČ DPH</string>
-           </property>
-          </widget>
-         </item>
-         <item row="11" column="0">
+         <item row="12" column="0">
           <widget class="QLabel" name="labelICO_D">
            <property name="font">
             <font>
@@ -1000,124 +880,6 @@ QProgressBar::chunk
            </property>
           </widget>
          </item>
-         <item row="4" column="2">
-          <widget class="QLabel" name="labelAdressO">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Adresa odberateľa</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="2">
-          <widget class="QLabel" name="labelPSC_O">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>PSČ</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="1">
-          <widget class="QLineEdit" name="lineEditCityD">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="placeholderText">
-            <string>Mesto</string>
-           </property>
-          </widget>
-         </item>
-         <item row="13" column="0">
-          <widget class="QLabel" name="labelICDPH_D">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">color: rgb(0, 0, 127);</string>
-           </property>
-           <property name="text">
-            <string>IČ DPH</string>
-           </property>
-          </widget>
-         </item>
-         <item row="11" column="2">
-          <widget class="QLabel" name="labelICO_O">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>IČO</string>
-           </property>
-          </widget>
-         </item>
-         <item row="13" column="3">
-          <widget class="QLineEdit" name="lineEditICDPH_O">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="placeholderText">
-            <string>IČ DPH</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="3">
-          <widget class="QLineEdit" name="lineEditPSC_O">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="placeholderText">
-            <string>PSČ</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="lineEditNameD">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="placeholderText">
-            <string>Meno</string>
-           </property>
-          </widget>
-         </item>
          <item row="7" column="0">
           <widget class="QLabel" name="labelStateD">
            <property name="font">
@@ -1129,193 +891,6 @@ QProgressBar::chunk
            </property>
            <property name="text">
             <string>Štát dodávateľa</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="3">
-          <widget class="QLineEdit" name="lineEditAdressO">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="placeholderText">
-            <string>Adresa</string>
-           </property>
-          </widget>
-         </item>
-         <item row="11" column="1">
-          <widget class="QLineEdit" name="lineEditICO_D">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="placeholderText">
-            <string>IČO</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QLineEdit" name="lineEditAdressD">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="placeholderText">
-            <string>Adresa</string>
-           </property>
-          </widget>
-         </item>
-         <item row="19" column="1">
-          <spacer name="verticalSpacer">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="12" column="0">
-          <widget class="QLabel" name="labelDIC_D">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">color: rgb(0, 0, 127);</string>
-           </property>
-           <property name="text">
-            <string>DIČ</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="2">
-          <widget class="QLabel" name="labelNameO">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Odberateľ</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1">
-          <widget class="QLineEdit" name="lineEditPSC_D">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="placeholderText">
-            <string>PSČ</string>
-           </property>
-          </widget>
-         </item>
-         <item row="11" column="3">
-          <widget class="QLineEdit" name="lineEditICO_O">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="placeholderText">
-            <string>IČO</string>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="0">
-          <widget class="QLabel" name="labelNumberFacture">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Číslo faktúry</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="3">
-          <widget class="QLineEdit" name="lineEditStateO">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="placeholderText">
-            <string>Štát</string>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="1">
-          <widget class="QLineEdit" name="lineEditNumberFacture">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>2</string>
-           </property>
-           <property name="placeholderText">
-            <string>Číslo faktúry</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="labelNameD">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Dodávateľ</string>
-           </property>
-          </widget>
-         </item>
-         <item row="12" column="1">
-          <widget class="QLineEdit" name="lineEditDIC_D">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="placeholderText">
-            <string>DIČ</string>
            </property>
           </widget>
          </item>
@@ -1336,7 +911,7 @@ QProgressBar::chunk
            </property>
           </widget>
          </item>
-         <item row="12" column="3">
+         <item row="13" column="3">
           <widget class="QLineEdit" name="lineEditDIC_O">
            <property name="font">
             <font>
@@ -1347,56 +922,6 @@ QProgressBar::chunk
            </property>
            <property name="placeholderText">
             <string>DIČ</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_2">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>60</width>
-             <height>70</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">border-image: url(:/icon/Data/supplier.png);</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="2">
-          <widget class="QLabel" name="labelStateO">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Štát odberateľa</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="3">
-          <widget class="QLineEdit" name="lineEditCityO">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="placeholderText">
-            <string>Mesto</string>
            </property>
           </widget>
          </item>
@@ -1450,60 +975,549 @@ QProgressBar::chunk
            </item>
           </layout>
          </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="lineEditAdressD">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>Adresa</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="lineEditNameD">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="placeholderText">
+            <string>Meno</string>
+           </property>
+          </widget>
+         </item>
+         <item row="14" column="0">
+          <widget class="QLabel" name="labelICDPH_D">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(0, 0, 127);</string>
+           </property>
+           <property name="text">
+            <string>IČ DPH</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="2">
+          <widget class="QLabel" name="labelStateO">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Štát odberateľa</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="labelAdressD">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Adresa dodávateľa</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="3">
+          <widget class="QLineEdit" name="lineEditAdressO">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>Adresa</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QLabel" name="label_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>70</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/icon/Data/customer.png);</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QLabel" name="labelNameO">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Odberateľ</string>
+           </property>
+          </widget>
+         </item>
+         <item row="13" column="0">
+          <widget class="QLabel" name="labelDIC_D">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(0, 0, 127);</string>
+           </property>
+           <property name="text">
+            <string>DIČ</string>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="1">
+          <widget class="QLineEdit" name="lineEditNumberFacture">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="placeholderText">
+            <string>Číslo faktúry</string>
+           </property>
+          </widget>
+         </item>
+         <item row="13" column="1">
+          <widget class="QLineEdit" name="lineEditDIC_D">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>DIČ</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="3">
+          <widget class="QLineEdit" name="lineEditPSC_O">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>PSČ</string>
+           </property>
+          </widget>
+         </item>
+         <item row="13" column="2">
+          <widget class="QLabel" name="labelDIC_O">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>DIČ</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QLineEdit" name="lineEditCityD">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>Mesto</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="1">
+          <widget class="QLineEdit" name="lineEditStateD">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>Štát</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="labelCityD">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Mesto dodávateľa</string>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="0">
+          <widget class="QCheckBox" name="checkBoxDPHPayer">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Platca DPH</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+           <property name="tristate">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="labelNameD">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Dodávateľ</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="labelPSC_D">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>PSČ</string>
+           </property>
+          </widget>
+         </item>
+         <item row="14" column="2">
+          <widget class="QLabel" name="labelICDPH_O">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>IČ DPH</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="3">
+          <widget class="QLineEdit" name="lineEditStateO">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>Štát</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QLineEdit" name="lineEditPSC_D">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>PSČ</string>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="1">
+          <widget class="QLineEdit" name="lineEditICO_D">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>IČO</string>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="3">
+          <widget class="QLineEdit" name="lineEditICO_O">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>IČO</string>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="0">
+          <widget class="QLabel" name="labelNumberFacture">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Číslo faktúry</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>70</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/icon/Data/supplier.png);</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="14" column="3">
+          <widget class="QLineEdit" name="lineEditICDPH_O">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>IČ DPH</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="2">
+          <widget class="QLabel" name="labelAdressO">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Adresa odberateľa</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="2">
+          <widget class="QLabel" name="labelPSC_O">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>PSČ</string>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="2">
+          <widget class="QLabel" name="labelICO_O">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>IČO</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="3">
+          <widget class="QLineEdit" name="lineEditCityO">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>Mesto</string>
+           </property>
+          </widget>
+         </item>
+         <item row="20" column="1">
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="6" column="2">
+          <widget class="QLabel" name="labelCityO">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Mesto odberateľa</string>
+           </property>
+          </widget>
+         </item>
+         <item row="14" column="1">
+          <widget class="QLineEdit" name="lineEditICDPH_D">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>IČ DPH</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="0">
+          <widget class="QLabel" name="labelNumberFactureFor">
+           <property name="text">
+            <string>Pre faktúru číslo</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="1">
+          <widget class="QLineEdit" name="lineEditNumberFactureFor">
+           <property name="placeholderText">
+            <string>Číslo faktúry</string>
+           </property>
+          </widget>
+         </item>
         </layout>
-       </item>
-       <item row="1" column="2">
-        <widget class="QPushButton" name="buttonBackTo1">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Späť</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <spacer name="horizontalSpacer_18">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="3">
-        <widget class="QPushButton" name="buttonNext3">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Ďalej</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="4">
-        <spacer name="horizontalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
        </item>
        <item row="1" column="1">
         <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="4">
+        <spacer name="horizontalSpacer_3">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -1682,7 +1696,7 @@ QProgressBar::chunk
             </font>
            </property>
            <property name="text">
-            <string>Stianuť</string>
+            <string>Stiahnuť</string>
            </property>
           </widget>
          </item>
@@ -1845,8 +1859,14 @@ QProgressBar::chunk
            </item>
            <item row="1" column="2">
             <widget class="QDoubleSpinBox" name="doubleSpinBoxPrice">
+             <property name="minimum">
+              <double>-999999.000000000000000</double>
+             </property>
              <property name="maximum">
               <double>999999.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>0.000000000000000</double>
              </property>
             </widget>
            </item>

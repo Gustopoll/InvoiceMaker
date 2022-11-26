@@ -35,7 +35,16 @@ SOURCES += \
     Entities/supplierentity.cpp \
     Extensions/customgraphicsview.cpp \
     Extensions/customstyle.cpp \
+    Extensions/customtreewidget.cpp \
     Extensions/datehelper.cpp \
+    Extensions/typeinvoicemapper.cpp \
+    PDF/Creator/invoicecreator.cpp \
+    PDF/canceledinvoice.cpp \
+    PDF/classicinvoice.cpp \
+    PDF/depostiinvoice.cpp \
+    PDF/invoice.cpp \
+    PDF/orderinvoice.cpp \
+    PDF/priceofferinvoice.cpp \
     Pages/Customers/addcustomerpage.cpp \
     Pages/Customers/customerspage.cpp \
     Pages/Customers/questiondeletecustomerpage.cpp \
@@ -79,8 +88,7 @@ SOURCES += \
     Repositories/Querry/UpdateQuerry/updatesupplierquerry.cpp \
     Repositories/Querry/basequerry.cpp \
     Repositories/dbcontext.cpp \
-    main.cpp \
-    pdfinvoicegenerator.cpp
+    main.cpp
 
 HEADERS += \
     Controller/customercontroller.h \
@@ -102,7 +110,16 @@ HEADERS += \
     Entities/supplierentity.h \
     Extensions/customgraphicsview.h \
     Extensions/customstyle.h \
+    Extensions/customtreewidget.h \
     Extensions/datehelper.h \
+    Extensions/typeinvoicemapper.h \
+    PDF/Creator/invoicecreator.h \
+    PDF/canceledinvoice.h \
+    PDF/classicinvoice.h \
+    PDF/depostiinvoice.h \
+    PDF/invoice.h \
+    PDF/orderinvoice.h \
+    PDF/priceofferinvoice.h \
     Pages/Customers/addcustomerpage.h \
     Pages/Customers/customerspage.h \
     Pages/Customers/questiondeletecustomerpage.h \
@@ -146,8 +163,7 @@ HEADERS += \
     Repositories/Querry/UpdateQuerry/updatesettingsquerry.h \
     Repositories/Querry/UpdateQuerry/updatesupplierquerry.h \
     Repositories/Querry/basequerry.h \
-    Repositories/dbcontext.h \
-    pdfinvoicegenerator.h
+    Repositories/dbcontext.h
 
 FORMS += \
     Pages/Customers/addcustomerpage.ui \

@@ -15,6 +15,7 @@ public:
     void Update();
 
     CustomerEntity* GetEntityByIndex(int index);
+    CustomerEntity* GetEntityById(int id);
 
 private:
     QList<CustomerEntity*> listCustomers;

@@ -106,9 +106,9 @@ void ItemInvoiceController::DeleteItem(QTreeWidget* widget, QTreeWidgetItem *ite
 double ItemInvoiceController::ComputeTotalPrice()
 {
     int count = spinBoxCount->value();
-    double price = doubleSpinBoxPrice->value();
+    double price = doubleSpinBoxPrice->value() * count;
     double dph = doubleSpinBoxDPH->value() / 100.0;
-    return ((double)count * price) + (dph * price);
+    return price + (dph * price);
 }
 
 double ItemInvoiceController::ComputeSumTotalPrice(QTreeWidget *widget)

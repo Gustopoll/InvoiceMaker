@@ -51,3 +51,25 @@ CustomerEntity *CustomerController::GetEntityByIndex(int index)
     }
     return listCustomers[index];
 }
+
+CustomerEntity *CustomerController::GetEntityById(int id)
+{
+    if (id < 0)
+        return nullptr;
+    if (listCustomers.isEmpty() == true)
+    {
+        GetCustomerQuerry q;
+        auto customers = q.GetAllNoDeleted();
+        for (int i = 0; i < customers.size(); i++)
+        {
+            listCustomers.push_back(customers[i]);
+        }
+    }
+
+    for (int i = 0; i < listCustomers.size(); i++)
+    {
+        if (listCustomers[i]->getId() == id)
+            return listCustomers[i];
+    }
+    return nullptr;
+}

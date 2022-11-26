@@ -6,17 +6,21 @@ SupplierEntity::SupplierEntity()
     payer = new PayerDPHEntity();
     bankinfo = new BankInfoEntity();
     id = -1;
-    factureNumber = 1;
+    factureNumberClassic = 1;
+    factureNumberOrder = 1;
+    factureNumberCanceled = 1;
+    factureNumberDeposit = 1;
+    factureNumberPriceoffer = 1;
 }
 
-int SupplierEntity::getFactureNumber()
+int SupplierEntity::getFactureNumberClassic()
 {
-    return factureNumber;
+    return factureNumberClassic;
 }
 
-void SupplierEntity::setFactureNumber(int value)
+void SupplierEntity::setFactureNumberClassic(int value)
 {
-    factureNumber = value;
+    factureNumberClassic = value;
 }
 
 int SupplierEntity::getId()
@@ -48,6 +52,75 @@ void SupplierEntity::setBankinfo(BankInfoEntity *value)
 {
     //delete this->bankinfo;
     bankinfo = value;
+}
+
+int SupplierEntity::getFactureNumberCanceled()
+{
+    return factureNumberCanceled;
+}
+
+void SupplierEntity::setFactureNumberCanceled(int value)
+{
+    factureNumberCanceled = value;
+}
+
+int SupplierEntity::getFactureNumberDeposit()
+{
+    return factureNumberDeposit;
+}
+
+void SupplierEntity::setFactureNumberDeposit(int value)
+{
+    factureNumberDeposit = value;
+}
+
+int SupplierEntity::getFactureNumberOrder()
+{
+    return factureNumberOrder;
+}
+
+void SupplierEntity::setFactureNumberOrder(int value)
+{
+    factureNumberOrder = value;
+}
+
+int SupplierEntity::getFactureNumberPriceoffer()
+{
+    return factureNumberPriceoffer;
+}
+
+void SupplierEntity::setFactureNumberPriceoffer(int value)
+{
+    factureNumberPriceoffer = value;
+}
+
+int SupplierEntity::getFactureNumberByInvoiceType(InvoiceType type)
+{
+    if (type == InvoiceType::Faktura)
+        return getFactureNumberClassic();
+    if (type == InvoiceType::Dobropis)
+        return getFactureNumberCanceled();
+    if (type == InvoiceType::Objednavka)
+        return getFactureNumberOrder();
+    if (type == InvoiceType::Cenova_ponuka)
+        return getFactureNumberPriceoffer();
+    if (type == InvoiceType::Zalohova_faktura)
+        return getFactureNumberDeposit();
+    return -1; //default value, it never should be hit
+}
+
+void SupplierEntity::setFactureNumberByInvoiceType(InvoiceType type, int value)
+{
+    if (type == InvoiceType::Faktura)
+        setFactureNumberClassic(value);
+    if (type == InvoiceType::Dobropis)
+        setFactureNumberCanceled(value);
+    if (type == InvoiceType::Objednavka)
+        setFactureNumberOrder(value);
+    if (type == InvoiceType::Cenova_ponuka)
+        setFactureNumberPriceoffer(value);
+    if (type == InvoiceType::Zalohova_faktura)
+        setFactureNumberDeposit(value);
 }
 
 QString SupplierEntity::getName()

@@ -50,3 +50,26 @@ SupplierEntity *SupplierController::GetEntityByIndex(int index)
     }
     return listSuppliers[index];
 }
+
+SupplierEntity *SupplierController::GetEntityById(int id)
+{
+    if (id < 0)
+        return nullptr;
+    if (listSuppliers.isEmpty() == true)
+    {
+        GetSupplierQuerry q;
+        auto suppliers = q.GetAllNoDeleted();
+        for (int i = 0; i < suppliers.size(); i++)
+        {
+            listSuppliers.push_back(suppliers[i]);
+        }
+    }
+
+    for (int i = 0; i < listSuppliers.size(); i++)
+    {
+        if (listSuppliers[i]->getId() == id)
+            return listSuppliers[i];
+    }
+    return nullptr;
+}
+

@@ -1,4 +1,4 @@
-#ifndef INVOICEPAGE2_H
+    #ifndef INVOICEPAGE2_H
 #define INVOICEPAGE2_H
 
 #include <QWidget>
@@ -24,6 +24,7 @@ public:
     ~InvoicePage();
 
     void Update();
+    void SetDobropis(InvoiceEntity* entity);
     void resizeEvent(QResizeEvent *event);
 private slots:
     void on_buttonNext2_clicked();
@@ -50,14 +51,18 @@ private slots:
     void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
     void on_doubleSpinBoxDPH_valueChanged(double arg1);
 
-
+    void SetSupplierEntity(SupplierEntity* entity, InvoiceType type);
+    void SetCustomerEntity(CustomerEntity* entity);
+    void ClearSupplier();
+    void ClearCustomer();
 
     void on_buttonX1_clicked();
-
     void on_buttonX2_clicked();
-
     void on_buttonX3_clicked();
+    void on_comboBoxType_currentIndexChanged(int index);
 
+    void on_buttonSavePDF_clicked();
+    InvoiceEntity* CreateInvoiceEntity();
 private:
     Ui::InvoicePage *ui;
     QStackedWidget *stackedWidget;
@@ -65,6 +70,13 @@ private:
     SupplierController *supplierController;
     CustomerController *customerController;
     ItemInvoiceController* itemInvoiceController;
+
+    void SetZalohovaFaktura();
+    void SetDobropis();
+    void SetObjednavka();
+    void SetCenovaPonuka();
+
+    void SaveInvoice(InvoiceEntity *entity);
 };
 
 #endif // INVOICEPAGE2_H

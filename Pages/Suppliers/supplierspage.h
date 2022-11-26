@@ -31,6 +31,8 @@ private slots:
 
     void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
 
+    void on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
+
 private:
     Ui::SuppliersPage *ui;
     QStackedWidget *stackedWidget;

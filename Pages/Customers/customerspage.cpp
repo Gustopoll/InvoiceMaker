@@ -16,6 +16,7 @@ CustomersPage::CustomersPage(QWidget *parent,QStackedWidget *stackedWidget) :
     ui->buttonBack->setStyleSheet(cs.ClassicButtonStyle());
     ui->buttonAddCustomer->setStyleSheet(cs.GreenButtonStyle());
 
+    ui->treeWidget->setColumnHidden(0,true);
     ui->treeWidget->setIconSize(QSize(40,40));
     Update();
 }
@@ -27,11 +28,11 @@ CustomersPage::~CustomersPage()
 void CustomersPage::resizeEvent(QResizeEvent *event)
 {
     auto sizeOne = event->size().width()/5;
-    ui->treeWidget->setColumnWidth(0,sizeOne/4);
-    ui->treeWidget->setColumnWidth(1,sizeOne*1.5);
+    ui->treeWidget->setColumnWidth(1,sizeOne/4);
     ui->treeWidget->setColumnWidth(2,sizeOne*1.5);
-    ui->treeWidget->setColumnWidth(3,sizeOne);
-    ui->treeWidget->setColumnWidth(4,5);
+    ui->treeWidget->setColumnWidth(3,sizeOne*1.5);
+    ui->treeWidget->setColumnWidth(4,sizeOne);
+    ui->treeWidget->setColumnWidth(5,5);
 }
 
 void CustomersPage::Update()
@@ -45,10 +46,11 @@ void CustomersPage::Update()
         auto item = new QTreeWidgetItem();
         auto customer = customers[i];
         item->setText(0,QString::number(customer->getId()));
-        item->setText(1,customer->getName());
-        item->setText(2,customer->getAdress()->getStreetWithNumber());
-        item->setText(3,customer->getAdress()->getCity());
-        item->setIcon(4,QIcon(":/icon/Data/deleteClose.png"));
+        item->setText(1,QString::number(i+1));
+        item->setText(2,customer->getName());
+        item->setText(3,customer->getAdress()->getStreetWithNumber());
+        item->setText(4,customer->getAdress()->getCity());
+        item->setIcon(5,QIcon(":/icon/Data/deleteClose.png"));
         ui->treeWidget->addTopLevelItem(item);
     }
 
@@ -69,8 +71,8 @@ void CustomersPage::on_buttonBack_clicked()
 
 void CustomersPage::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
 {
-    int lastColumn = 4;
-    auto nameCustomer = item->text(1);
+    int lastColumn = 5;
+    auto nameCustomer = item->text(2);
     int idCustomer = item->text(0).toInt();
 
     if (lastColumn == column)
@@ -81,11 +83,16 @@ void CustomersPage::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
         stackedWidget->setCurrentIndex((int)PageNumber::QUESTION_CUSTOMER);
         return;
     }
+}
 
-    auto w = (AddCustomerPage*) stackedWidget->widget((int)PageNumber::ADDCUSTOMER);
-
+void CustomersPage::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column)
+{
+    if (column == 5)
+        return;
+    int idCustomer = item->text(0).toInt();
     GetCustomerQuerry q;
     auto entity = q.GetOneById(idCustomer);
+    auto w = (AddCustomerPage*) stackedWidget->widget((int)PageNumber::ADDCUSTOMER);
     w->SetCustomerEntity(entity);
     stackedWidget->setCurrentIndex((int)PageNumber::ADDCUSTOMER);
 }

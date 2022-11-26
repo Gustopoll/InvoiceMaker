@@ -3,7 +3,7 @@
 InvoiceEntity::InvoiceEntity()
 {
     paymentMethon = Payment::Cash;
-    invoiceType = InvoiceType::TypeA;
+    invoiceType = InvoiceType::Faktura;
     customerSaved = nullptr;
     supplierSaved = nullptr;
     items.clear();
@@ -118,6 +118,11 @@ double InvoiceEntity::GetTotalPrice()
         total += items[i]->getTotalPrice();
     }
     return total;
+}
+
+int InvoiceEntity::getFactureNumberByInvoiceType()
+{
+    return supplierSaved->getFactureNumberByInvoiceType(invoiceType);
 }
 
 InvoiceType InvoiceEntity::getInvoiceType()

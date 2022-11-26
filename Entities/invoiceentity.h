@@ -50,6 +50,7 @@ public:
     void addItem(ItemEntity* value);
     double GetTotalPrice();
 
+    int getFactureNumberByInvoiceType();
 private:
     int id;
 

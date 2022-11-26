@@ -20,7 +20,6 @@ AddSupplierPage::AddSupplierPage(QWidget *parent, QStackedWidget *stackedWidget)
     controller->Add(ui->lineEditPSC_D);
     controller->Add(ui->lineEditStateD);
     controller->Add(ui->lineEditStreetD);
-    controller->Add(ui->lineEditNumberFacture);
     controller->Add(ui->lineEditStreetNumberD);
 
     controllerOnlyDPHPayer = new RequiredItemsController();
@@ -53,7 +52,11 @@ void AddSupplierPage::SetSupplierEntity(SupplierEntity *entity)
     ui->lineEditStateD->setText(entity->getAdress()->getState());
     ui->lineEditPSC_D->setText(entity->getAdress()->getPsc());
     ui->lineEditCityD->setText(entity->getAdress()->getCity());
-    ui->lineEditNumberFacture->setText(QString::number(entity->getFactureNumber()));
+    ui->lineEditNumberClassic->setText(QString::number(entity->getFactureNumberClassic()));
+    ui->lineEditNumberCanceled->setText(QString::number(entity->getFactureNumberCanceled()));
+    ui->lineEditNumberDeposit->setText(QString::number(entity->getFactureNumberDeposit()));
+    ui->lineEditNumberOrder->setText(QString::number(entity->getFactureNumberOrder()));
+    ui->lineEditPriceoffer->setText(QString::number(entity->getFactureNumberPriceoffer()));
     ui->lineEditICO_D->setText(entity->getIco());
 
     if (entity->isPayer())
@@ -143,7 +146,11 @@ SupplierEntity *AddSupplierPage::CreateSuppliersEntity()
     entity->getAdress()->setState(ui->lineEditStateD->text());
     entity->getAdress()->setPsc(ui->lineEditPSC_D->text());
     entity->getAdress()->setCity(ui->lineEditCityD->text());
-    entity->setFactureNumber(ui->lineEditNumberFacture->text().toInt()); //TODO test na INT
+    entity->setFactureNumberClassic(ui->lineEditNumberClassic->text().toInt());
+    entity->setFactureNumberCanceled(ui->lineEditNumberCanceled->text().toInt());
+    entity->setFactureNumberDeposit(ui->lineEditNumberDeposit->text().toInt());
+    entity->setFactureNumberPriceoffer(ui->lineEditPriceoffer->text().toInt());
+    entity->setFactureNumberOrder(ui->lineEditNumberOrder->text().toInt());
     entity->setIco(ui->lineEditICO_D->text());
 
     if (ui->checkBoxDPHPayer->checkState() == Qt::CheckState::Checked)

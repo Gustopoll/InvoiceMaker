@@ -3,8 +3,11 @@
 
 enum class InvoiceType
 {
-    TypeA,
-    TypeB
+    Faktura,
+    Zalohova_faktura,
+    Cenova_ponuka,
+    Objednavka,
+    Dobropis
 };
 
 #endif // INVOICETYPE_H

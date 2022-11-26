@@ -30,7 +30,11 @@ SupplierEntity *GetSupplierQuerry::GetOneById(int id)
     e->setId(q.value("id").toInt());
     e->setName(q.value("name").toString());
     e->setIco(q.value("ico").toString());
-    e->setFactureNumber(q.value("facturenumber").toInt());
+    e->setFactureNumberClassic(q.value("numberClassic").toInt());
+    e->setFactureNumberCanceled(q.value("numberCanceled").toInt());
+    e->setFactureNumberDeposit(q.value("numberDeposit").toInt());
+    e->setFactureNumberOrder(q.value("numberOrder").toInt());
+    e->setFactureNumberPriceoffer(q.value("numberPriceoffer").toInt());
 
     e->getPayer()->setDic(q.value("dic").toString());
     e->getPayer()->setIcdph(q.value("icdph").toString());
@@ -58,7 +62,11 @@ QList<SupplierEntity *> GetSupplierQuerry::GetAll()
             e->setId(q.value("id").toInt());
             e->setName(q.value("name").toString());
             e->setIco(q.value("ico").toString());
-            e->setFactureNumber(q.value("facturenumber").toInt());
+            e->setFactureNumberClassic(q.value("numberClassic").toInt());
+            e->setFactureNumberCanceled(q.value("numberCanceled").toInt());
+            e->setFactureNumberDeposit(q.value("numberDeposit").toInt());
+            e->setFactureNumberOrder(q.value("numberOrder").toInt());
+            e->setFactureNumberPriceoffer(q.value("numberPriceoffer").toInt());
 
             e->getPayer()->setDic(q.value("dic").toString());
             e->getPayer()->setIcdph(q.value("icdph").toString());
@@ -89,7 +97,11 @@ QList<SupplierEntity *> GetSupplierQuerry::GetAllNoDeleted()
             e->setId(q.value("id").toInt());
             e->setName(q.value("name").toString());
             e->setIco(q.value("ico").toString());
-            e->setFactureNumber(q.value("facturenumber").toInt());
+            e->setFactureNumberClassic(q.value("numberClassic").toInt());
+            e->setFactureNumberCanceled(q.value("numberCanceled").toInt());
+            e->setFactureNumberDeposit(q.value("numberDeposit").toInt());
+            e->setFactureNumberOrder(q.value("numberOrder").toInt());
+            e->setFactureNumberPriceoffer(q.value("numberPriceoffer").toInt());
 
             e->getPayer()->setDic(q.value("dic").toString());
             e->getPayer()->setIcdph(q.value("icdph").toString());

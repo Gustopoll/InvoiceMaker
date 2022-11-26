@@ -1,39 +1,18 @@
-#include "pdfinvoicegenerator.h"
+#include "depostiinvoice.h"
 
-#include <Extensions/datehelper.h>
+#include <Extensions/typeinvoicemapper.h>
 
-PDFInvoiceGenerator::PDFInvoiceGenerator(QString pathfile)
+DepostiInvoice::DepostiInvoice(QString pathfile) : Invoice(pathfile)
 {
-    printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setPaperSize(QPrinter::A4);
-    //printer.setOutputFileName(QCoreApplication::applicationDirPath() + "/realTEST.pdf");
-    printer.setOutputFileName(pathfile);
-    printer.setPageMargins(QMarginsF(15, 15, 15, 15));
-    bold = QFont("Calibri", 11);
-    bold.setBold(true);
-    classic = QFont("Calibri", 11);
-    qDebug() << printer.width() << printer.height();
-    qDebug() << pathfile;
 
-    painter = new QPainter();
-    if (!painter->begin(&printer))
-    {
-        qDebug() << "no draw";
-        return;
-    }
 }
 
-PDFInvoiceGenerator::PDFInvoiceGenerator(QPainter *paint)
+DepostiInvoice::DepostiInvoice(QPainter *paint) : Invoice(paint)
 {
-    painter = paint;
-    painter->fillRect(0,0,5000,5000,QBrush(Qt::white));
-    bold = QFont("Calibri", 11);
-    bold.setBold(true);
-    classic = QFont("Calibri", 11);
-    qDebug() << printer.width() << printer.height();
+
 }
 
-void PDFInvoiceGenerator::Generate(InvoiceEntity *invoice)
+void DepostiInvoice::Generate(InvoiceEntity *invoice)
 {
     painter->setFont(classic);
     painter->setPen(pen);
@@ -44,18 +23,24 @@ void PDFInvoiceGenerator::Generate(InvoiceEntity *invoice)
     newLine();
     newLine();
     newLine();
-    LineGenerate(newLine());
-
+    LineGenerate(newLine());    
     OtherGenerate(invoice);
 
+    if (AllItemHasSameDPH(invoice) == true)
+        ItemsGeneratorSameDPH(invoice);
+    else
+        ItemsGeneratorNoSameDPH(invoice);
     painter->end();
-    //delete painter; // delete only from QString
+}
+
+DepostiInvoice::~DepostiInvoice()
+{
 
 }
 
-void PDFInvoiceGenerator::SupplierGenerate(SupplierEntity *entity)
+void DepostiInvoice::SupplierGenerate(SupplierEntity *entity)
 {
-    painter->drawText(leftBorder,newLine(),"Faktúra číslo: " + QString::number(entity->getFactureNumber()));
+    painter->drawText(leftBorder,newLine(),"Zálohová faktúra číslo: " + QString::number(entity->getFactureNumberDeposit()));
     newLine();
 
     painter->setFont(bold);
@@ -77,7 +62,7 @@ void PDFInvoiceGenerator::SupplierGenerate(SupplierEntity *entity)
         painter->drawText(leftBorder, newLine(), "DIČ: Nie som platca DPH");
 }
 
-void PDFInvoiceGenerator::CustomerGenerate(CustomerEntity *entity)
+void DepostiInvoice::CustomerGenerate(CustomerEntity *entity)
 {
     countLine -= 155; // nový stĺpec (135)
     int len = 500; // od kade začína pravý stlpec (hodnota x)
@@ -96,24 +81,15 @@ void PDFInvoiceGenerator::CustomerGenerate(CustomerEntity *entity)
     painter->drawText(len, newLine(), "IČ DPH: " + entity->getPayer()->getIcdph());
 }
 
-void PDFInvoiceGenerator::LineGenerate(int posY)
-{
-    painter->setPen(QPen(Qt::black, 1));
-    painter->drawLine(leftBorder,posY,653,posY);
-    painter->setPen(pen);
-}
-
-void PDFInvoiceGenerator::OtherGenerate(InvoiceEntity *invoice)
+void DepostiInvoice::OtherGenerate(InvoiceEntity *invoice)
 {
     newLine();
     int sameLine = newLine();
     painter->drawText(leftBorder,sameLine,"Dátum vystavenia");
-    painter->drawText(leftBorder + 200,sameLine,"Dátum dodania");
     painter->drawText(leftBorder + 400,sameLine,"Dátum splatnosti");
 
     sameLine = newLine();
     painter->drawText(leftBorder,sameLine, invoice->getDateV().toString("dd.MM.yyyy"));
-    painter->drawText(leftBorder + 200,sameLine,invoice->getDateD().toString("dd.MM.yyyy"));
     painter->drawText(leftBorder + 400,sameLine,invoice->getDateS().toString("dd.MM.yyyy"));
 
     newLine(); newLine(); newLine();
@@ -133,7 +109,7 @@ void PDFInvoiceGenerator::OtherGenerate(InvoiceEntity *invoice)
     painter->drawText(leftBorder,sameLine,invoice->getSupplierSaved()->getBankinfo()->getIBAN());
     painter->drawText(leftBorder + 200,sameLine,invoice->getSupplierSaved()->getBankinfo()->getSWIFT());
     painter->drawText(leftBorder + 300,sameLine,invoice->getSupplierSaved()->getBankinfo()->getVS());
-    painter->drawText(leftBorder + 400,sameLine, QString::number(invoice->GetTotalPrice()) + " EUR");
+    painter->drawText(leftBorder + 400,sameLine, QString::number(invoice->GetTotalPrice(),'f',2) + " EUR");
 
     newLine(); newLine();
     sameLine = newLine();
@@ -141,19 +117,7 @@ void PDFInvoiceGenerator::OtherGenerate(InvoiceEntity *invoice)
     painter->drawText(leftBorder + 200,sameLine,"Objednávky");
 
     sameLine = newLine();
-    painter->drawText(leftBorder,sameLine,"Hotovosť");
-    painter->drawText(leftBorder + 200,sameLine,"1/2022");
-
-
-}
-
-int PDFInvoiceGenerator::newLine()
-{
-    countLine += 20;
-    return countLine;
-}
-
-void PDFInvoiceGenerator::scroll(int dx)
-{
-    countLine = dx;
+    painter->drawText(leftBorder,sameLine,TypeInvoiceMapper::toString(invoice->getPaymentMethon()));
+    QString objednavky = QString::number(invoice->getSupplierSaved()->getFactureNumberDeposit()) + "/" + invoice->getDateV().toString("yyyy");
+    painter->drawText(leftBorder + 200,sameLine,objednavky);
 }

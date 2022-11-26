@@ -1,7 +1,6 @@
 #include "mainpage.h"
 #include "ui_mainpage.h"
 #include <QDebug>
-#include "pdfinvoicegenerator.h"
 
 #include <QTreeWidgetItem>
 #include <QResizeEvent>
@@ -12,6 +11,9 @@
 #include <Controller/suppliercontroller.h>
 #include <Pages/NewInvoice/invoicepage.h>
 #include <Pages/Invoice/questiondeleteinvoicepage.h>
+#include <PDF/classicinvoice.h>
+#include <Extensions/typeinvoicemapper.h>
+#include <PDF/Creator/invoicecreator.h>
 
 MainPage::MainPage(QWidget *parent, QStackedWidget *stackedWidget)
     : QMainWindow(parent)
@@ -75,14 +77,15 @@ void MainPage::Update()
 
 void MainPage::resizeEvent(QResizeEvent *event)
 {
-    auto sizeOne = event->size().width()/6;
+    auto sizeOne = event->size().width()/7;
     ui->treeWidget->setColumnWidth(1,sizeOne/3);
-    ui->treeWidget->setColumnWidth(2,sizeOne*1.9);
+    ui->treeWidget->setColumnWidth(2,sizeOne*1.5);
     ui->treeWidget->setColumnWidth(3,sizeOne);
     ui->treeWidget->setColumnWidth(4,sizeOne);
-    ui->treeWidget->setColumnWidth(5,sizeOne*0.8);
-    ui->treeWidget->setColumnWidth(6,5);
-    ui->treeWidget->setColumnWidth(7,10);
+    ui->treeWidget->setColumnWidth(5,sizeOne);
+    ui->treeWidget->setColumnWidth(6,sizeOne*0.8);
+    ui->treeWidget->setColumnWidth(7,5);
+    ui->treeWidget->setColumnWidth(8,10);
 }
 
 void MainPage::AddInvoiceEntity(InvoiceEntity *entity, int number)
@@ -92,21 +95,34 @@ void MainPage::AddInvoiceEntity(InvoiceEntity *entity, int number)
     item->setText(0,QString::number(entity->getId()));
     item->setText(1,QString::number(number));
     item->setText(2,entity->getSupplierSaved()->getName());
-    item->setText(3,QString::number(entity->GetTotalPrice()) + " €");
-    item->setText(4,helper.toString(entity->getDateV()));
-    item->setText(5,QString::number(entity->getSupplierSaved()->getFactureNumber()));
-    item->setIcon(6,QIcon(":/icon/Data/savePDF.png"));
-    item->setIcon(7,QIcon(":/icon/Data/deleteClose.png"));
+    item->setTextColor(3,TypeInvoiceMapper::getInvoiceTypeColor(entity->getInvoiceType()));
+    item->setText(3,TypeInvoiceMapper::toString(entity->getInvoiceType()));
+    item->setText(4,QString::number(entity->GetTotalPrice()) + " €");
+    item->setText(5,helper.toString(entity->getDateV()));
+    item->setText(6,QString::number(entity->getFactureNumberByInvoiceType()));
+    item->setIcon(7,QIcon(":/icon/Data/savePDF.png"));
+    item->setIcon(8,QIcon(":/icon/Data/deleteClose.png"));
 
-    item->setTextAlignment(5,5);
+    item->setTextAlignment(6,5);
 
     this->ui->treeWidget->addTopLevelItem(item);
 }
 
-void MainPage::SaveInvoice(InvoiceEntity *entity, QString pathfile)
+void MainPage::SaveInvoice(InvoiceEntity *entity)
 {
-    PDFInvoiceGenerator gen(pathfile);
-    gen.Generate(entity);
+    std::string nameForFile = entity->getSupplierSaved()->getName().toStdString() + "_" + QString::number(entity->getFactureNumberByInvoiceType()).toStdString()  + ".pdf";
+    QString dirpath;
+    dirpath = QFileDialog::getSaveFileName(this,tr("Ukldanie"),tr(nameForFile.c_str()),tr("PDF(*.pdf)")),
+                  QCoreApplication::applicationDirPath();
+
+    if (dirpath.isEmpty() == true)
+        return;
+    qDebug() << dirpath;
+
+    InvoiceCreator creator;
+    auto invoiceGenerator = creator.Create(dirpath,entity->getInvoiceType());
+    invoiceGenerator->Generate(entity);
+    delete invoiceGenerator;
     temporaryMessageController->StartVisibleLabel(ui->labelMSG);
 }
 
@@ -121,21 +137,12 @@ void MainPage::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
 {
     GetInvoiceQuerry q;
     auto entity = q.GetOneById(item->text(0).toInt());
-    if (column == 6) //save invoice
+    if (column == 7) //save invoice
     {
-        QString dirpath;
-        dirpath = QFileDialog::getExistingDirectory(this, tr("Vyber zložku"),
-                      QCoreApplication::applicationDirPath(),
-                      QFileDialog::ShowDirsOnly
-                      | QFileDialog::DontResolveSymlinks);
-
-        if (dirpath.isEmpty() == true)
-            return;
-        dirpath += "/invoice.pdf";
-        SaveInvoice(entity,dirpath);
+        SaveInvoice(entity);
         return;
     }
-    if (column == 7) //delete invoice
+    if (column == 8) //delete invoice
     {
         auto w = (QuestionDeleteInvoicePage*)stackedWidget->widget((int)PageNumber::QUESTION_INVOICE);
         w->SetName(entity->getSupplierSaved()->getName());
@@ -143,10 +150,6 @@ void MainPage::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
         stackedWidget->setCurrentIndex((int)PageNumber::QUESTION_INVOICE);
         return;
     }
-
-    ShowInvoicePage *w = (ShowInvoicePage*)stackedWidget->widget((int)PageNumber::SHOW_INVOICE);
-    w->SetInvoice(entity);
-    stackedWidget->setCurrentIndex((int)PageNumber::SHOW_INVOICE);
 }
 
 void MainPage::on_spinBoxYear_valueChanged(int arg1)
@@ -170,4 +173,17 @@ void MainPage::on_comboBoxSupplier_activated(int index)
     Update();
 
     qDebug() << "supplier changed";
+}
+
+void MainPage::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column)
+{
+    if ((column == 7) || (column == 8))
+        return;
+
+    GetInvoiceQuerry q;
+    auto entity = q.GetOneById(item->text(0).toInt());
+
+    ShowInvoicePage *w = (ShowInvoicePage*)stackedWidget->widget((int)PageNumber::SHOW_INVOICE);
+    w->SetInvoice(entity);
+    stackedWidget->setCurrentIndex((int)PageNumber::SHOW_INVOICE);
 }
